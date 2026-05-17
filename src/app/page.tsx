@@ -13,6 +13,9 @@ import { createClient } from "@/utils/supabase/client";
 export default function Home() {
   const [recentSearches, setRecentSearches] = useState<any[]>([]);
   const [marketAverage, setMarketAverage] = useState<string>("Calculating...");
+  const [totalValuation, setTotalValuation] = useState<string>("Rs 0");
+  const [propertiesOwned, setPropertiesOwned] = useState<string>("0");
+  const [averageROI, setAverageROI] = useState<string>("0.0%");
   const supabase = createClient();
 
   useEffect(() => {
@@ -26,6 +29,30 @@ export default function Home() {
           .order("created_at", { ascending: false })
           .limit(5);
         if (analyses) setRecentSearches(analyses);
+
+        // Fetch user portfolios
+        const { data: portfolios } = await supabase
+          .from("user_portfolios")
+          .select("estimated_value, projected_roi")
+          .eq("user_id", user.id);
+          
+        if (portfolios && portfolios.length > 0) {
+          const sumValuation = portfolios.reduce((acc, curr) => acc + (Number(curr.estimated_value) || 0), 0);
+          const sumROI = portfolios.reduce((acc, curr) => acc + (Number(curr.projected_roi) || 0), 0);
+          
+          setPropertiesOwned(portfolios.length.toString());
+          setAverageROI((sumROI / portfolios.length).toFixed(1) + "%");
+          
+          let formattedVal = "Rs 0";
+          if (sumValuation >= 10000000) {
+            formattedVal = `Rs ${(sumValuation / 10000000).toFixed(2)} Crore`;
+          } else if (sumValuation >= 100000) {
+            formattedVal = `Rs ${(sumValuation / 100000).toFixed(2)} Lac`;
+          } else {
+            formattedVal = `Rs ${sumValuation.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+          }
+          setTotalValuation(formattedVal);
+        }
       }
 
       // Fetch market data for average price
@@ -71,22 +98,22 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <MetricCard
             title="Total Valuation"
-            value="Rs 0"
-            trend={{ value: 0, label: "Add properties in Sprint 2" }}
+            value={totalValuation}
+            trend={{ value: 0, label: "Live Portfolio Data" }}
             icon={DollarSign}
             delay={0.1}
           />
           <MetricCard
             title="Average ROI"
-            value="0.0%"
-            trend={{ value: 0, label: "Add properties in Sprint 2" }}
+            value={averageROI}
+            trend={{ value: 0, label: "Live Portfolio Data" }}
             icon={Percent}
             delay={0.2}
           />
           <MetricCard
             title="Properties"
-            value="0"
-            trend={{ value: 0, label: "Add properties in Sprint 2" }}
+            value={propertiesOwned}
+            trend={{ value: 0, label: "Live Portfolio Data" }}
             icon={Building}
             delay={0.3}
           />

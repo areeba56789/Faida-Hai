@@ -2,8 +2,32 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowRight, Building, MapPin, Layers, CheckCircle2, XCircle } from "lucide-react";
+import { Sparkles, ArrowRight, Building, MapPin, Layers, CheckCircle2, XCircle, BookmarkPlus, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
+
+const parseToNumeric = (valueStr: string): number => {
+  if (!valueStr) return 0;
+  const lower = valueStr.toLowerCase();
+  
+  // Extract all numbers and decimals
+  const numMatch = lower.match(/[\d.]+/);
+  if (!numMatch) return 0;
+  
+  const baseNum = parseFloat(numMatch[0]);
+  
+  if (lower.includes('crore')) {
+    return baseNum * 10000000;
+  } else if (lower.includes('lac') || lower.includes('lakh')) {
+    return baseNum * 100000;
+  } else if (lower.includes('m') || lower.includes('million')) {
+    return baseNum * 1000000;
+  }
+  
+  // If it's just raw string with commas like "45,000,000"
+  const rawNum = parseFloat(valueStr.replace(/,/g, ''));
+  return isNaN(rawNum) ? baseNum : rawNum;
+};
 
 interface AnalysisResult {
   estimatedValue: string;
@@ -23,6 +47,10 @@ export function AIChatInterface() {
   const [area, setArea] = useState("");
 
   const [result, setResult] = useState<AnalysisResult | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  
+  const supabase = createClient();
 
   const handleAnalyze = async () => {
     if (!city || !floors || !area) return;
@@ -69,7 +97,39 @@ export function AIChatInterface() {
     setArea("");
     setResult(null);
     setErrorMsg(null);
+    setSaveSuccess(false);
     setStep("input");
+  };
+
+  const handleSaveToPortfolio = async () => {
+    if (!result) return;
+    setIsSaving(true);
+    
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+      
+      const parsedValue = parseToNumeric(result.estimatedValue);
+      const parsedROI = parseFloat(result.projectedROI.replace(/[^0-9.-]/g, '')) || 0;
+      
+      const { error } = await supabase.from('user_portfolios').insert({
+        user_id: user.id,
+        city,
+        floors,
+        area,
+        estimated_value: parsedValue,
+        projected_roi: parsedROI,
+        key_strengths: result.strengths,
+        risk_factors: result.risks
+      });
+      
+      if (error) throw error;
+      setSaveSuccess(true);
+    } catch (err: any) {
+      console.error("Failed to save to portfolio:", err);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -198,11 +258,11 @@ export function AIChatInterface() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-[#1f1f1f] rounded-xl p-4 border border-[#262626]">
                   <p className="text-xs text-[#a3a3a3] uppercase mb-1">Estimated Value</p>
-                  <p className="text-xl font-bold text-white">${result.estimatedValue}M</p>
+                  <p className="text-xl font-bold text-white">{result.estimatedValue}</p>
                 </div>
                 <div className="bg-[#1f1f1f] rounded-xl p-4 border border-[#262626]">
                   <p className="text-xs text-[#a3a3a3] uppercase mb-1">Projected ROI</p>
-                  <p className="text-xl font-bold text-[#10B981]">{result.projectedROI}%</p>
+                  <p className="text-xl font-bold text-[#10B981]">{result.projectedROI}</p>
                 </div>
               </div>
 
@@ -230,12 +290,33 @@ export function AIChatInterface() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#262626]">
+              <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
                 <button
                   onClick={reset}
-                  className="text-sm text-[#3B82F6] hover:text-white transition-colors"
+                  className="text-sm text-[#a3a3a3] hover:text-white transition-colors"
                 >
-                  Start New Analysis
+                  New Analysis
+                </button>
+                <button
+                  onClick={handleSaveToPortfolio}
+                  disabled={isSaving || saveSuccess}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2 transition-all ${
+                    saveSuccess 
+                      ? "bg-green-500/10 text-[#10B981] border border-green-500/30" 
+                      : "bg-[#1f1f1f] hover:bg-[#262626] text-white border border-[#262626]"
+                  }`}
+                >
+                  {saveSuccess ? (
+                    <>
+                      <Check className="w-4 h-4" />
+                      <span>Saved to Portfolio!</span>
+                    </>
+                  ) : (
+                    <>
+                      <BookmarkPlus className="w-4 h-4" />
+                      <span>{isSaving ? "Saving..." : "Add to Portfolio"}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </motion.div>
