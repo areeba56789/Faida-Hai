@@ -12,10 +12,11 @@ import { createClient } from "@/utils/supabase/client";
 
 export default function Home() {
   const [recentSearches, setRecentSearches] = useState<any[]>([]);
+  const [marketAverage, setMarketAverage] = useState<string>("Calculating...");
   const supabase = createClient();
 
   useEffect(() => {
-    const fetchRecentSearches = async () => {
+    const fetchDashboardData = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         const { data: analyses } = await supabase
@@ -26,8 +27,31 @@ export default function Home() {
           .limit(5);
         if (analyses) setRecentSearches(analyses);
       }
+
+      // Fetch market data for average price
+      const { data: marketData } = await supabase
+        .from("market_data")
+        .select("price");
+        
+      if (marketData && marketData.length > 0) {
+        const sum = marketData.reduce((acc, curr) => acc + (Number(curr.price) || 0), 0);
+        const avg = sum / marketData.length;
+        
+        // Format in PKR Crores/Lacs
+        let formattedAvg = "Rs 0";
+        if (avg >= 10000000) {
+          formattedAvg = `Rs ${(avg / 10000000).toFixed(2)} Crore`;
+        } else if (avg >= 100000) {
+          formattedAvg = `Rs ${(avg / 100000).toFixed(2)} Lac`;
+        } else {
+          formattedAvg = `Rs ${avg.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+        }
+        setMarketAverage(formattedAvg);
+      } else {
+        setMarketAverage("Rs 0");
+      }
     };
-    fetchRecentSearches();
+    fetchDashboardData();
   }, []);
 
   return (
@@ -67,9 +91,9 @@ export default function Home() {
             delay={0.3}
           />
           <MetricCard
-            title="Market Growth"
-            value="+8.4%"
-            trend={{ value: -1.2, label: "vs last month (Lahore Avg)" }}
+            title="Market Average"
+            value={marketAverage}
+            trend={{ value: 0, label: "Lahore Live Average" }}
             icon={TrendingUp}
             delay={0.4}
           />

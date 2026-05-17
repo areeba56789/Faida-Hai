@@ -73,16 +73,25 @@ export default function LoginPage() {
         </div>
 
         {/* Tab Selection */}
-        <div className="flex bg-[#0a0a0a] border border-[#262626] rounded-lg p-1 mb-6">
+        <div className="relative flex bg-[#0a0a0a] border border-[#262626] rounded-lg p-1 mb-6">
+          {/* Sliding Pill */}
+          <motion.div
+            className="absolute top-1 bottom-1 w-[calc(50%-4px)] bg-[#1f1f1f] rounded-md shadow-sm pointer-events-none"
+            initial={false}
+            animate={{ x: authMode === "login" ? "0%" : "100%" }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          />
           <button
+            type="button"
             onClick={() => { setAuthMode("login"); setError(null); }}
-            className={`flex-1 text-sm font-medium py-2 rounded-md transition-colors ${authMode === "login" ? "bg-[#1f1f1f] text-white" : "text-[#a3a3a3] hover:text-white"}`}
+            className={`relative flex-1 z-10 text-sm font-medium py-2 rounded-md transition-colors ${authMode === "login" ? "text-white" : "text-[#a3a3a3] hover:text-white"}`}
           >
             Log In
           </button>
           <button
+            type="button"
             onClick={() => { setAuthMode("signup"); setError(null); }}
-            className={`flex-1 text-sm font-medium py-2 rounded-md transition-colors ${authMode === "signup" ? "bg-[#1f1f1f] text-white" : "text-[#a3a3a3] hover:text-white"}`}
+            className={`relative flex-1 z-10 text-sm font-medium py-2 rounded-md transition-colors ${authMode === "signup" ? "text-white" : "text-[#a3a3a3] hover:text-white"}`}
           >
             Create Account
           </button>
@@ -141,10 +150,10 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-[#3B82F6] to-[#10B981] hover:opacity-90 text-white font-medium py-3 rounded-lg flex items-center justify-center space-x-2 transition-all disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-[#3B82F6] to-[#10B981] hover:opacity-90 text-white font-semibold text-base py-3 rounded-lg flex items-center justify-center space-x-2 transition-all disabled:opacity-50"
             >
-              <span>{loading ? "Please wait..." : authMode === "login" ? "Sign In to FaidaHai" : "Create Account"}</span>
-              {!loading && <ArrowRight className="w-4 h-4" />}
+              <span>{loading ? "Please wait..." : "Continue"}</span>
+              {!loading && <ArrowRight className="w-5 h-5" />}
             </button>
           </div>
         </form>
