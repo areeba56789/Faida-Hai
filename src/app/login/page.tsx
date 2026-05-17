@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 export default function LoginPage() {
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,38 +16,34 @@ export default function LoginPage() {
   const router = useRouter();
   const supabase = createClient();
 
-  const handleEmailSignIn = async (e: React.FormEvent) => {
+  const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    
-    if (error) {
-      setError(error.message);
+    if (authMode === "login") {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        setError(error.message);
+      } else {
+        router.push("/");
+        router.refresh();
+      }
     } else {
-      router.push("/");
-      router.refresh();
-    }
-    setLoading(false);
-  };
-
-  const handleSignUp = async () => {
-    setLoading(true);
-    setError(null);
-    
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    
-    if (error) {
-      setError(error.message);
-    } else {
-      setError("Check your email for the confirmation link.");
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      
+      if (error) {
+        setError(error.message);
+      } else {
+        setError("Account created! Please check your email for the confirmation link.");
+      }
     }
     setLoading(false);
   };
@@ -68,11 +65,27 @@ export default function LoginPage() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md bg-[#141414] border border-[#262626] rounded-2xl p-8 shadow-2xl"
       >
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] to-[#10B981]">
             FaidaHai
           </h1>
-          <p className="text-[#a3a3a3] mt-2 text-sm">Sign in to your premium dashboard</p>
+          <p className="text-[#a3a3a3] mt-2 text-sm">Access your premium real estate dashboard</p>
+        </div>
+
+        {/* Tab Selection */}
+        <div className="flex bg-[#0a0a0a] border border-[#262626] rounded-lg p-1 mb-6">
+          <button
+            onClick={() => { setAuthMode("login"); setError(null); }}
+            className={`flex-1 text-sm font-medium py-2 rounded-md transition-colors ${authMode === "login" ? "bg-[#1f1f1f] text-white" : "text-[#a3a3a3] hover:text-white"}`}
+          >
+            Log In
+          </button>
+          <button
+            onClick={() => { setAuthMode("signup"); setError(null); }}
+            className={`flex-1 text-sm font-medium py-2 rounded-md transition-colors ${authMode === "signup" ? "bg-[#1f1f1f] text-white" : "text-[#a3a3a3] hover:text-white"}`}
+          >
+            Create Account
+          </button>
         </div>
 
         <button
@@ -90,11 +103,11 @@ export default function LoginPage() {
 
         <div className="flex items-center mb-6">
           <div className="flex-grow border-t border-[#262626]"></div>
-          <span className="px-3 text-[#a3a3a3] text-sm">or</span>
+          <span className="px-3 text-[#a3a3a3] text-sm">or with email</span>
           <div className="flex-grow border-t border-[#262626]"></div>
         </div>
 
-        <form onSubmit={handleEmailSignIn} className="space-y-4">
+        <form onSubmit={handleAuthSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-[#a3a3a3] uppercase tracking-wider mb-2">
               Email Address
@@ -122,7 +135,7 @@ export default function LoginPage() {
             />
           </div>
 
-          {error && <p className="text-red-500 text-sm font-medium text-center">{error}</p>}
+          {error && <p className={`text-sm font-medium text-center ${error.includes('Account created') ? 'text-[#10B981]' : 'text-red-500'}`}>{error}</p>}
 
           <div className="pt-2 space-y-3">
             <button
@@ -130,16 +143,8 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full bg-gradient-to-r from-[#3B82F6] to-[#10B981] hover:opacity-90 text-white font-medium py-3 rounded-lg flex items-center justify-center space-x-2 transition-all disabled:opacity-50"
             >
-              <span>{loading ? "Signing In..." : "Sign In"}</span>
+              <span>{loading ? "Please wait..." : authMode === "login" ? "Sign In to FaidaHai" : "Create Account"}</span>
               {!loading && <ArrowRight className="w-4 h-4" />}
-            </button>
-            <button
-              type="button"
-              onClick={handleSignUp}
-              disabled={loading}
-              className="w-full bg-transparent border border-[#3B82F6]/50 text-[#3B82F6] hover:bg-[#3B82F6]/10 font-medium py-3 rounded-lg transition-colors disabled:opacity-50"
-            >
-              Create Account
             </button>
           </div>
         </form>
