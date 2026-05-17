@@ -31,6 +31,9 @@ export async function POST(req: NextRequest) {
       contents: queryText,
     });
     
+    if (!embedResponse.embeddings || embedResponse.embeddings.length === 0) {
+      throw new Error("Failed to generate embedding for the query.");
+    }
     const queryEmbedding = embedResponse.embeddings[0].values;
 
     // 2. Perform Similarity Search in Supabase (RAG)
