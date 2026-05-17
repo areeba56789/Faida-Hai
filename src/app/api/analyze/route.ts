@@ -85,7 +85,7 @@ You must respond with a strictly formatted JSON object (no markdown, no code blo
       },
     });
 
-    const resultText = response.text();
+    const resultText = response.text;
     if (!resultText) {
       throw new Error("Empty response from AI");
     }
