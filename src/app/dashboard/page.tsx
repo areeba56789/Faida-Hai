@@ -5,7 +5,7 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { AnimatedChart } from "@/components/dashboard/AnimatedChart";
 import dynamic from "next/dynamic";
-const ThreeDVisualizer = dynamic(() => import("@/components/3d/ThreeDVisualizer").then(mod => mod.ThreeDVisualizer), { ssr: false });
+const ApartmentModel3D = dynamic(() => import("@/components/3d/ApartmentModel3D").then(mod => mod.ApartmentModel3D), { ssr: false });
 import { AIChatInterface } from "@/components/ai/AIChatInterface";
 import { DollarSign, Percent, TrendingUp, Building, Search } from "lucide-react";
 import { motion } from "framer-motion";
@@ -17,6 +17,8 @@ export default function Home() {
   const [totalValuation, setTotalValuation] = useState<string>("Rs 0");
   const [propertiesOwned, setPropertiesOwned] = useState<string>("0");
   const [averageROI, setAverageROI] = useState<string>("0.0%");
+  const [rawValuation, setRawValuation] = useState(0);
+  const [rawROI, setRawROI] = useState(0);
   const supabase = createClient();
 
   useEffect(() => {
@@ -42,7 +44,10 @@ export default function Home() {
           const sumROI = portfolios.reduce((acc, curr) => acc + (Number(curr.projected_roi) || 0), 0);
           
           setPropertiesOwned(portfolios.length.toString());
-          setAverageROI((sumROI / portfolios.length).toFixed(1) + "%");
+          const computedROI = sumROI / portfolios.length;
+          setAverageROI(computedROI.toFixed(1) + "%");
+          setRawValuation(sumValuation);
+          setRawROI(computedROI);
           
           let formattedVal = "Rs 0";
           if (sumValuation >= 10000000) {
@@ -136,7 +141,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="xl:col-span-2 h-[500px]"
           >
-            <ThreeDVisualizer />
+            <ApartmentModel3D />
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -176,7 +181,7 @@ export default function Home() {
           </motion.div>
           
           <div id="analytics" className="lg:col-span-2 h-[400px]">
-            <AnimatedChart delay={0.7} />
+            <AnimatedChart delay={0.7} portfolioValue={rawValuation} averageROI={rawROI} />
           </div>
         </div>
       </div>

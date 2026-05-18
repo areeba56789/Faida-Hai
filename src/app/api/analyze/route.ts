@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     // 1. Generate an embedding for the user's query
     const queryText = `Real estate property in ${neighborhood}, ${floors} floors, ${area} sqft.`;
     const embedResponse = await ai.models.embedContent({
-      model: "text-embedding-004",
+      model: "gemini-embedding-2",
       contents: queryText,
     });
     

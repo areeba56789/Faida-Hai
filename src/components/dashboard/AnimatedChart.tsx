@@ -1,19 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
+import React from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-const data = [
-  { name: "Jan", profit: 4000, investment: 2400 },
-  { name: "Feb", profit: 3000, investment: 1398 },
-  { name: "Mar", profit: 2000, investment: 9800 },
-  { name: "Apr", profit: 2780, investment: 3908 },
-  { name: "May", profit: 1890, investment: 4800 },
-  { name: "Jun", profit: 2390, investment: 3800 },
-  { name: "Jul", profit: 3490, investment: 4300 },
-];
-
-export function AnimatedChart({ delay = 0 }: { delay?: number }) {
+export function AnimatedChart({ delay = 0, portfolioValue = 0, averageROI = 0 }: { delay?: number, portfolioValue?: number, averageROI?: number }) {
+  // Generate pseudo-historical data based on current value and ROI
+  // Assuming the current portfolioValue is the latest, and it grew by averageROI per year.
+  // We'll mock a 6 month trend where the latest month reaches the current value.
+  const data = React.useMemo(() => {
+    if (portfolioValue === 0) return [];
+    
+    // Monthly growth rate approximation
+    const monthlyRate = (averageROI / 100) / 12;
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+    
+    let currentVal = portfolioValue / Math.pow(1 + monthlyRate, 6); // start value 6 months ago
+    
+    return months.map(month => {
+      const investment = currentVal * 0.8; // mock original investment as 80% of value
+      const profit = currentVal - investment;
+      const point = { name: month, profit: Math.round(profit), investment: Math.round(investment) };
+      currentVal *= (1 + monthlyRate); // compound for next month
+      return point;
+    });
+  }, [portfolioValue, averageROI]);
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
