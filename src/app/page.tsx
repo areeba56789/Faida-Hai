@@ -1,183 +1,101 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { MetricCard } from "@/components/dashboard/MetricCard";
-import { AnimatedChart } from "@/components/dashboard/AnimatedChart";
-import { ThreeDVisualizer } from "@/components/3d/ThreeDVisualizer";
-import { AIChatInterface } from "@/components/ai/AIChatInterface";
-import { DollarSign, Percent, TrendingUp, Building, Search } from "lucide-react";
 import { motion } from "framer-motion";
-import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
+import { ArrowRight, Building2, TrendingUp, ShieldCheck, Map as MapIcon } from "lucide-react";
 
-export default function Home() {
-  const [recentSearches, setRecentSearches] = useState<any[]>([]);
-  const [marketAverage, setMarketAverage] = useState<string>("Calculating...");
-  const [totalValuation, setTotalValuation] = useState<string>("Rs 0");
-  const [propertiesOwned, setPropertiesOwned] = useState<string>("0");
-  const [averageROI, setAverageROI] = useState<string>("0.0%");
-  const supabase = createClient();
-
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: analyses } = await supabase
-          .from("property_analysis")
-          .select("*")
-          .eq("user_id", user.id)
-          .order("created_at", { ascending: false })
-          .limit(5);
-        if (analyses) setRecentSearches(analyses);
-
-        // Fetch user portfolios
-        const { data: portfolios } = await supabase
-          .from("user_portfolios")
-          .select("estimated_value, projected_roi")
-          .eq("user_id", user.id);
-          
-        if (portfolios && portfolios.length > 0) {
-          const sumValuation = portfolios.reduce((acc, curr) => acc + (Number(curr.estimated_value) || 0), 0);
-          const sumROI = portfolios.reduce((acc, curr) => acc + (Number(curr.projected_roi) || 0), 0);
-          
-          setPropertiesOwned(portfolios.length.toString());
-          setAverageROI((sumROI / portfolios.length).toFixed(1) + "%");
-          
-          let formattedVal = "Rs 0";
-          if (sumValuation >= 10000000) {
-            formattedVal = `Rs ${(sumValuation / 10000000).toFixed(2)} Crore`;
-          } else if (sumValuation >= 100000) {
-            formattedVal = `Rs ${(sumValuation / 100000).toFixed(2)} Lac`;
-          } else {
-            formattedVal = `Rs ${sumValuation.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-          }
-          setTotalValuation(formattedVal);
-        }
-      }
-
-      // Fetch market data for average price
-      const { data: marketData } = await supabase
-        .from("market_data")
-        .select("price");
-        
-      if (marketData && marketData.length > 0) {
-        const sum = marketData.reduce((acc, curr) => acc + (Number(curr.price) || 0), 0);
-        const avg = sum / marketData.length;
-        
-        // Format in PKR Crores/Lacs
-        let formattedAvg = "Rs 0";
-        if (avg >= 10000000) {
-          formattedAvg = `Rs ${(avg / 10000000).toFixed(2)} Crore`;
-        } else if (avg >= 100000) {
-          formattedAvg = `Rs ${(avg / 100000).toFixed(2)} Lac`;
-        } else {
-          formattedAvg = `Rs ${avg.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
-        }
-        setMarketAverage(formattedAvg);
-      } else {
-        setMarketAverage("Rs 0");
-      }
-    };
-    fetchDashboardData();
-  }, []);
-
+export default function LandingPage() {
   return (
-    <DashboardLayout>
-      <div className="max-w-7xl mx-auto space-y-6 pb-12">
-        <div className="flex items-center justify-between">
-          <motion.h1 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="text-2xl font-bold text-white tracking-tight"
-          >
-            Portfolio Overview
-          </motion.h1>
-        </div>
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col relative overflow-hidden">
+      {/* Background Gradients */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#3B82F6]/20 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#10B981]/20 blur-[120px] rounded-full pointer-events-none" />
 
-        {/* Top Metrics Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <MetricCard
-            title="Total Valuation"
-            value={totalValuation}
-            trend={{ value: 0, label: "Live Portfolio Data" }}
-            icon={DollarSign}
-            delay={0.1}
-          />
-          <MetricCard
-            title="Average ROI"
-            value={averageROI}
-            trend={{ value: 0, label: "Live Portfolio Data" }}
-            icon={Percent}
-            delay={0.2}
-          />
-          <MetricCard
-            title="Properties"
-            value={propertiesOwned}
-            trend={{ value: 0, label: "Live Portfolio Data" }}
-            icon={Building}
-            delay={0.3}
-          />
-          <MetricCard
-            title="Market Average"
-            value={marketAverage}
-            trend={{ value: 0, label: "Lahore Live Average" }}
-            icon={TrendingUp}
-            delay={0.4}
-          />
-        </div>
+      {/* Navigation */}
+      <nav className="w-full h-20 flex items-center justify-between px-8 z-10 border-b border-[#262626] bg-[#0a0a0a]/80 backdrop-blur-md">
+        <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] to-[#10B981]">
+          FaidaHai
+        </span>
+        <Link href="/login">
+          <button className="px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 bg-white text-black hover:bg-gray-200">
+            Login
+          </button>
+        </Link>
+      </nav>
 
-        {/* Main Content: 3D Visualizer & AI Chat */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="xl:col-span-2 h-[500px]"
-          >
-            <ThreeDVisualizer />
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="h-[500px]"
-          >
-            <AIChatInterface />
-          </motion.div>
-        </div>
+      {/* Hero Section */}
+      <main className="flex-1 flex flex-col items-center justify-center text-center px-4 z-10 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-4xl"
+        >
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+            The Palantir of <br className="hidden md:block" />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#10B981]">
+              Pakistan Real Estate
+            </span>
+          </h1>
+          <p className="text-[#a3a3a3] text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            FaidaHai aggregates live market intelligence from Zameen and DHA, empowering you with AI-driven insights, 3D spatial heatmaps, and enterprise-grade portfolio management.
+          </p>
 
-        {/* Recent Searches & Bottom Chart */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="bg-[#141414] border border-[#262626] rounded-2xl p-6 shadow-xl"
-          >
-            <h2 className="text-lg font-bold text-white mb-4 flex items-center space-x-2">
-              <Search className="w-5 h-5 text-[#3B82F6]" />
-              <span>Recent Searches</span>
-            </h2>
-            {recentSearches.length > 0 ? (
-              <div className="space-y-4">
-                {recentSearches.map((search) => (
-                  <div key={search.id} className="p-3 bg-[#1f1f1f] rounded-lg border border-[#262626]">
-                    <p className="text-sm font-semibold text-white truncate">{search.city}</p>
-                    <p className="text-xs text-[#a3a3a3] mt-1">{search.area} sqft, {search.floors} floors</p>
-                    <p className="text-xs text-[#10B981] font-medium mt-1">Est: {search.estimated_value}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-[#a3a3a3] italic">No recent searches yet. Start analyzing above!</p>
-            )}
-          </motion.div>
-          
-          <div className="lg:col-span-2 h-[400px]">
-            <AnimatedChart delay={0.7} />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/login">
+              <button className="flex items-center justify-center space-x-2 w-full sm:w-auto px-8 py-4 bg-[#10B981] hover:bg-[#059669] text-white rounded-xl font-bold transition-all duration-200 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                <span>Get Started Now</span>
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </Link>
+            <Link href="#features">
+              <button className="w-full sm:w-auto px-8 py-4 bg-[#141414] hover:bg-[#1f1f1f] text-white border border-[#262626] rounded-xl font-medium transition-all duration-200">
+                View Features
+              </button>
+            </Link>
           </div>
-        </div>
-      </div>
-    </DashboardLayout>
+        </motion.div>
+
+        {/* Feature Grid */}
+        <motion.div 
+          id="features"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-24"
+        >
+          {[
+            {
+              icon: Building2,
+              title: "Portfolio Ledger",
+              desc: "Manage properties, track historical valuations, and project future ROI natively."
+            },
+            {
+              icon: MapIcon,
+              title: "3D Heatmaps",
+              desc: "Visualize spatial yield distributions across DHA, Gulberg, and Bahria Town."
+            },
+            {
+              icon: ShieldCheck,
+              title: "Enterprise Grade",
+              desc: "Bank-level security with strict route protection and isolated data environments."
+            }
+          ].map((feature, idx) => (
+            <div key={idx} className="bg-[#141414]/80 backdrop-blur-md border border-[#262626] rounded-2xl p-8 text-left hover:border-[#3B82F6]/50 transition-colors duration-300">
+              <div className="w-12 h-12 bg-[#3B82F6]/10 rounded-xl flex items-center justify-center mb-6">
+                <feature.icon className="w-6 h-6 text-[#3B82F6]" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+              <p className="text-[#a3a3a3] leading-relaxed">{feature.desc}</p>
+            </div>
+          ))}
+        </motion.div>
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full py-8 text-center text-[#525252] text-sm z-10 border-t border-[#262626] mt-24">
+        &copy; {new Date().getFullYear()} FaidaHai. Enterprise Real Estate AI.
+      </footer>
+    </div>
   );
 }
