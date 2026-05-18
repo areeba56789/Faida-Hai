@@ -54,6 +54,16 @@ export function AIChatInterface() {
 
   const handleAnalyze = async () => {
     if (!neighborhood || !floors || !area) return;
+    
+    // Validation for gibberish or empty input
+    const trimmedNeighborhood = neighborhood.trim();
+    const repeatingCharsRegex = /^(.)\1{4,}$/; // matches 5 or more repeating characters
+    
+    if (trimmedNeighborhood.length < 3 || repeatingCharsRegex.test(trimmedNeighborhood)) {
+      setErrorMsg("Please enter a precise location/neighborhood.");
+      return;
+    }
+
     setStep("loading");
     setErrorMsg(null);
     
