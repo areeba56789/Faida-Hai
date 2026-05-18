@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Building2, Map, PieChart, Settings, LogOut } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "#", active: true },
@@ -13,6 +15,15 @@ const navItems = [
 ];
 
 export function Sidebar() {
+  const router = useRouter();
+  const supabase = createClient();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+    router.push("/login");
+  };
+
   return (
     <motion.aside
       initial={{ x: -250 }}
@@ -54,7 +65,10 @@ export function Sidebar() {
           <Settings className="w-5 h-5" />
           <span className="font-medium text-sm">Settings</span>
         </div>
-        <div className="flex items-center space-x-3 px-3 py-2.5 rounded-lg cursor-pointer text-[#a3a3a3] hover:bg-[#141414] hover:text-red-400 transition-colors">
+        <div 
+          onClick={handleLogout}
+          className="flex items-center space-x-3 px-3 py-2.5 rounded-lg cursor-pointer text-[#a3a3a3] hover:bg-[#141414] hover:text-red-400 transition-colors"
+        >
           <LogOut className="w-5 h-5" />
           <span className="font-medium text-sm">Logout</span>
         </div>
