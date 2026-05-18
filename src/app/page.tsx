@@ -3,57 +3,56 @@
 import { useRef, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Building2, Map, ShieldCheck, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Building2, Map, ShieldCheck, Mail, MapPin, Phone, User } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial } from "@react-three/drei";
 
+// --- 3D Digital City Component ---
+function DigitalCity() {
+  const groupRef = useRef<any>(null);
 
-// --- 3D Neural Grid Component ---
-function NeuralGrid() {
-  const ref = useRef<any>(null);
-  
-  // Create a grid of points
-  const points = useMemo(() => {
-    const positions = [];
-    const size = 30;
-    const step = 1.5;
-    
-    for (let x = -size; x <= size; x += step) {
-      for (let z = -size; z <= size; z += step) {
-        // Create an organic terrain-like wave using sin/cos
-        const y = Math.sin(x * 0.2) * Math.cos(z * 0.2) * 1.5 + (Math.random() * 0.5);
-        positions.push(x, y, z);
+  // Generate random buildings
+  const buildings = useMemo(() => {
+    const items = [];
+    const gridSize = 10;
+    const spacing = 1.2;
+    for (let x = -gridSize / 2; x < gridSize / 2; x++) {
+      for (let z = -gridSize / 2; z < gridSize / 2; z++) {
+        if (Math.random() > 0.3) {
+          const height = Math.random() * 3 + 0.5;
+          items.push({
+            position: [x * spacing, height / 2 - 2, z * spacing],
+            scale: [0.8, height, 0.8]
+          });
+        }
       }
     }
-    return new Float32Array(positions);
+    return items;
   }, []);
 
   useFrame((state) => {
-    if (ref.current) {
+    if (groupRef.current) {
       // Parallax effect based on mouse movement
       const targetX = (state.pointer.x * Math.PI) / 10;
       const targetY = (state.pointer.y * Math.PI) / 10;
       
-      ref.current.rotation.x += (targetY - ref.current.rotation.x) * 0.05;
-      ref.current.rotation.y += (targetX - ref.current.rotation.y) * 0.05;
+      groupRef.current.rotation.x += (targetY - groupRef.current.rotation.x) * 0.05;
+      groupRef.current.rotation.y += (targetX - groupRef.current.rotation.y) * 0.05;
       
       // Slow continuous spin
-      ref.current.rotation.y += 0.001;
+      groupRef.current.rotation.y += 0.002;
     }
   });
 
   return (
-    <group rotation={[Math.PI / 6, 0, 0]}>
-      <Points ref={ref} positions={points} stride={3} frustumCulled={false}>
-        <PointMaterial
-          transparent
-          color="#10B981"
-          size={0.08}
-          sizeAttenuation={true}
-          depthWrite={false}
-          opacity={0.8}
-        />
-      </Points>
+    <group ref={groupRef} rotation={[Math.PI / 8, 0, 0]}>
+      {buildings.map((b, i) => (
+        <mesh key={i} position={b.position as any}>
+          <boxGeometry args={b.scale as any} />
+          <meshBasicMaterial color="#10B981" wireframe={true} transparent opacity={0.3} />
+        </mesh>
+      ))}
+      {/* Ground Grid */}
+      <gridHelper args={[30, 30, '#3B82F6', '#262626']} position={[0, -2, 0]} />
     </group>
   );
 }
@@ -65,6 +64,12 @@ export default function LandingPage() {
   // Parallax transformations for scroll
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
+
+  const architects = [
+    { name: "Safoora", role: "AI & Spatial Data Lead", desc: "Specializes in vector databases, RAG systems, and embedding optimization." },
+    { name: "Eman", role: "Platform Architect", desc: "Expert in scalable cloud infrastructure, PostgreSQL, and security protocols." },
+    { name: "Areeba", role: "Frontend & 3D Engineering", desc: "Crafts high-performance WebGL interfaces and premium glassmorphic UX." }
+  ];
   
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col relative overflow-hidden">
@@ -79,6 +84,13 @@ export default function LandingPage() {
             FaidaHai
           </span>
         </div>
+
+        <div className="hidden md:flex items-center space-x-8">
+          <Link href="#tech" className="text-sm font-medium text-[#a3a3a3] hover:text-white transition-colors">Tech</Link>
+          <Link href="#about" className="text-sm font-medium text-[#a3a3a3] hover:text-white transition-colors">About</Link>
+          <Link href="/login" className="text-sm font-medium text-[#a3a3a3] hover:text-white transition-colors">App</Link>
+        </div>
+
         <Link href="/login">
           <button className="px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 bg-[#141414] border border-[#262626] text-white hover:bg-[#1f1f1f] hover:border-[#10B981]/50">
             Client Portal
@@ -92,7 +104,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 z-0 opacity-70">
           <Canvas camera={{ position: [0, 5, 20], fov: 60 }}>
             <fog attach="fog" args={['#0a0a0a', 10, 40]} />
-            <NeuralGrid />
+            <DigitalCity />
           </Canvas>
           {/* Gradients to blend 3D into background */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10" />
@@ -136,7 +148,7 @@ export default function LandingPage() {
       </section>
 
       {/* Tech Showcase Section */}
-      <section className="relative w-full py-32 bg-[#0a0a0a] z-20">
+      <section id="tech" className="relative w-full py-32 bg-[#0a0a0a] z-20">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Proprietary Technology Stack</h2>
@@ -240,6 +252,45 @@ export default function LandingPage() {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Neural Architects Section */}
+      <section id="about" className="relative w-full py-32 bg-[#050505] z-20 overflow-hidden border-t border-[#1a1a1a]">
+        <div className="max-w-7xl mx-auto px-8 relative">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">The Neural Architects</h2>
+            <p className="text-[#a3a3a3] text-lg max-w-2xl mx-auto">
+              Incubated at the <span className="text-[#10B981] font-semibold">Adan IT Center</span>, our engineering team fuses spatial data science with enterprise software architecture.
+            </p>
+          </div>
+
+          <div className="flex overflow-x-hidden relative py-4">
+             {/* Gradient fade masks for carousel edges */}
+             <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-10"></div>
+             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050505] to-transparent z-10"></div>
+             
+             <motion.div 
+               animate={{ x: ["0%", "-50%"] }}
+               transition={{ ease: "linear", duration: 25, repeat: Infinity }}
+               className="flex space-x-8 whitespace-nowrap pl-8"
+             >
+                {[...architects, ...architects].map((member, i) => (
+                  <div key={i} className="inline-block w-80 bg-[#0a0a0a] border border-[#262626] rounded-3xl p-8 shrink-0 shadow-lg hover:border-[#3B82F6]/50 transition-colors">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-[#3B82F6] to-[#10B981] p-1 mb-6 mx-auto">
+                       <div className="w-full h-full rounded-full bg-[#141414] flex items-center justify-center">
+                         <User className="w-8 h-8 text-[#a3a3a3]" />
+                       </div>
+                    </div>
+                    <h3 className="text-xl font-bold text-center text-white mb-2">{member.name}</h3>
+                    <p className="text-sm text-center text-[#10B981] font-mono mb-4">{member.role}</p>
+                    <p className="text-sm text-center text-[#737373] whitespace-normal leading-relaxed">
+                      {member.desc}
+                    </p>
+                  </div>
+                ))}
+             </motion.div>
           </div>
         </div>
       </section>

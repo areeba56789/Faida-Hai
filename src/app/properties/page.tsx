@@ -110,7 +110,7 @@ export default function PropertiesPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className="bg-[#141414] border border-[#262626] rounded-2xl p-6 hover:border-[#3B82F6]/50 transition-colors duration-300 flex flex-col group relative overflow-hidden"
+                className="bg-[#141414]/60 backdrop-blur-xl border border-[#262626] rounded-2xl p-6 hover:border-[#10B981]/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-300 flex flex-col group relative overflow-hidden"
               >
                 {/* Delete Button (appears on hover) */}
                 <button
@@ -132,7 +132,7 @@ export default function PropertiesPage() {
                 </div>
 
                 <div className="space-y-4 flex-1">
-                  <div className="bg-[#0a0a0a] rounded-xl p-4 border border-[#262626]">
+                  <div className="bg-[#0a0a0a]/50 backdrop-blur-md rounded-xl p-4 border border-[#262626] group-hover:border-[#3B82F6]/30 transition-colors">
                     <div className="flex items-center space-x-2 text-[#a3a3a3] mb-1">
                       <DollarSign className="w-4 h-4" />
                       <span className="text-xs font-semibold uppercase tracking-wider">Estimated Value</span>
@@ -142,7 +142,7 @@ export default function PropertiesPage() {
                     </div>
                   </div>
 
-                  <div className="bg-[#0a0a0a] rounded-xl p-4 border border-[#262626]">
+                  <div className="bg-[#0a0a0a]/50 backdrop-blur-md rounded-xl p-4 border border-[#262626] group-hover:border-[#10B981]/30 transition-colors">
                     <div className="flex items-center space-x-2 text-[#a3a3a3] mb-1">
                       <Percent className="w-4 h-4" />
                       <span className="text-xs font-semibold uppercase tracking-wider">Projected ROI</span>

@@ -18,16 +18,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Gemini API key is not configured." }, { status: 500 });
     }
 
-    const { city, floors, area } = await req.json();
+    const { neighborhood, floors, area } = await req.json();
 
-    if (!city || !floors || !area) {
+    if (!neighborhood || !floors || !area) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     // 1. Generate an embedding for the user's query
-    const queryText = `Real estate property in ${city}, ${floors} floors, ${area} sqft.`;
+    const queryText = `Real estate property in ${neighborhood}, ${floors} floors, ${area} sqft.`;
     const embedResponse = await ai.models.embedContent({
-      model: "models/embedding-001",
+      model: "text-embedding-004",
       contents: queryText,
     });
     
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 4. Send Grounded Prompt to AI
-    const prompt = `You are the FaidaHai AI Agent, an elite intelligence system evaluating a property in ${city}, Pakistan.
+    const prompt = `You are the FaidaHai AI Agent, an elite intelligence system evaluating a property in ${neighborhood}, Pakistan.
 The target property has ${floors} floors and a total area of ${area} sqft (consider mapping this to Marla or Kanal if applicable).
 
 Here is the REAL LIVE MARKET DATA from our database containing neighborhood comparables from Zameen:
@@ -66,6 +66,10 @@ ${contextData}
 
 Using the neighborhood comparables provided above as your factual baseline, estimate the value of the target property.
 Since the data might be sparse, extrapolate logically based on general local trends and the comparables provided.
+
+CRITICAL INSTRUCTION: If you do not have sufficient comparables or hyper-local data for ${neighborhood}, DO NOT FAIL OR APOLOGIZE.
+Instead, use your macro-economic knowledge of Pakistan real estate to provide a baseline projection and include this exact message in one of your "risks" or "strengths" strings:
+"Hyper-local data for ${neighborhood} is currently indexing for our next rollout. However, based on macro-economic data, here is the baseline projection..."
 
 IMPORTANT: All monetary values should be expressed in Pakistani Rupees (PKR), formatted smartly (e.g., "2.5 Crore" or "45 Lacs").
 
@@ -95,7 +99,7 @@ You must respond with a strictly formatted JSON object (no markdown, no code blo
     // Save to Supabase History
     const { error: dbError } = await supabase.from("property_analysis").insert({
       user_id: user.id,
-      city: city,
+      city: neighborhood,
       floors: parseInt(floors),
       area: parseFloat(area),
       estimated_value: parseFloat(parsedData.estimatedValue),
