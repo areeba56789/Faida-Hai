@@ -4,18 +4,12 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Building2, Map, PieChart, Settings, LogOut } from "lucide-react";
 import Link from "next/link";
 import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-
-const navItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "#", active: true },
-  { icon: Building2, label: "Properties", href: "#", active: false },
-  { icon: Map, label: "Market Heatmap", href: "#", active: false },
-  { icon: PieChart, label: "Analytics", href: "#", active: false },
-];
 
 export function Sidebar() {
   const router = useRouter();
+  const pathname = usePathname();
   const supabase = createClient();
 
   const handleLogout = async () => {
@@ -23,6 +17,13 @@ export function Sidebar() {
     router.refresh();
     router.push("/login");
   };
+
+  const navItems = [
+    { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", active: pathname === "/dashboard" },
+    { icon: Building2, label: "Properties", href: "/properties", active: pathname === "/properties" },
+    { icon: Map, label: "Market Heatmap", href: "#", active: false },
+    { icon: PieChart, label: "Analytics", href: "#", active: false },
+  ];
 
   return (
     <motion.aside
