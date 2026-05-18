@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { AnimatedChart } from "@/components/dashboard/AnimatedChart";
-import { ThreeDVisualizer } from "@/components/3d/ThreeDVisualizer";
+import dynamic from "next/dynamic";
+const ThreeDVisualizer = dynamic(() => import("@/components/3d/ThreeDVisualizer").then(mod => mod.ThreeDVisualizer), { ssr: false });
 import { AIChatInterface } from "@/components/ai/AIChatInterface";
 import { DollarSign, Percent, TrendingUp, Building, Search } from "lucide-react";
 import { motion } from "framer-motion";
@@ -129,6 +130,7 @@ export default function Home() {
         {/* Main Content: 3D Visualizer & AI Chat */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <motion.div 
+            id="heatmap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -173,7 +175,7 @@ export default function Home() {
             )}
           </motion.div>
           
-          <div className="lg:col-span-2 h-[400px]">
+          <div id="analytics" className="lg:col-span-2 h-[400px]">
             <AnimatedChart delay={0.7} />
           </div>
         </div>

@@ -42,7 +42,7 @@ export function AIChatInterface() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   
   // Form State
-  const [city, setCity] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
   const [floors, setFloors] = useState("");
   const [area, setArea] = useState("");
 
@@ -53,7 +53,7 @@ export function AIChatInterface() {
   const supabase = createClient();
 
   const handleAnalyze = async () => {
-    if (!city || !floors || !area) return;
+    if (!neighborhood || !floors || !area) return;
     setStep("loading");
     setErrorMsg(null);
     
@@ -63,7 +63,7 @@ export function AIChatInterface() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ city, floors, area })
+        body: JSON.stringify({ neighborhood, floors, area })
       });
       
       let data;
@@ -92,7 +92,7 @@ export function AIChatInterface() {
   };
 
   const reset = () => {
-    setCity("");
+    setNeighborhood("");
     setFloors("");
     setArea("");
     setResult(null);
@@ -114,7 +114,7 @@ export function AIChatInterface() {
       
       const { error } = await supabase.from('user_portfolios').insert({
         user_id: user.id,
-        city,
+        city: neighborhood,
         floors,
         area,
         estimated_value: parsedValue,
@@ -164,13 +164,13 @@ export function AIChatInterface() {
               <div className="space-y-4">
                 <div>
                   <label className="text-xs font-semibold text-[#a3a3a3] uppercase tracking-wider mb-2 flex items-center">
-                    <MapPin className="w-3 h-3 mr-1" /> City
+                    <MapPin className="w-3 h-3 mr-1" /> Location / Neighborhood
                   </label>
                   <input
                     type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="e.g. Dubai, New York"
+                    value={neighborhood}
+                    onChange={(e) => setNeighborhood(e.target.value)}
+                    placeholder="e.g. DHA Phase 6, Lahore"
                     className="w-full bg-[#0a0a0a] border border-[#262626] rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-[#3B82F6] transition-colors"
                   />
                 </div>
@@ -205,7 +205,7 @@ export function AIChatInterface() {
 
               <button
                 onClick={handleAnalyze}
-                disabled={!city || !floors || !area}
+                disabled={!neighborhood || !floors || !area}
                 className="w-full mt-4 bg-gradient-to-r from-[#3B82F6] to-[#10B981] hover:opacity-90 text-white font-medium py-3 rounded-lg flex items-center justify-center space-x-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>Generate Analysis</span>
@@ -233,7 +233,7 @@ export function AIChatInterface() {
                 </div>
               </div>
               <h3 className="text-white font-medium mb-2">Analyzing Data Points...</h3>
-              <p className="text-sm text-[#a3a3a3]">Consulting FaidaHai AI for {city} market</p>
+              <p className="text-sm text-[#a3a3a3]">Consulting FaidaHai AI for {neighborhood} market</p>
               
               <div className="w-full max-w-xs mt-8 space-y-3">
                 <div className="h-2 bg-[#262626] rounded-full overflow-hidden">
