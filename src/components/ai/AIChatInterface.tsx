@@ -136,9 +136,9 @@ export function AIChatInterface() {
     <div className="bg-[#141414] border border-[#262626] rounded-2xl p-6 h-full flex flex-col relative overflow-hidden">
       <div className="flex items-center space-x-2 mb-6">
         <div className="p-2 bg-[#3B82F6]/10 rounded-lg">
-          <Sparkles className="w-5 h-5 text-[#3B82F6]" />
+          <Sparkles className="w-5 h-5 text-[#10B981]" />
         </div>
-        <h2 className="text-lg font-bold text-white">Gemini AI Analyst</h2>
+        <h2 className="text-lg font-bold text-white">FaidaHai AI Agent</h2>
       </div>
 
       <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar relative">
@@ -233,7 +233,7 @@ export function AIChatInterface() {
                 </div>
               </div>
               <h3 className="text-white font-medium mb-2">Analyzing Data Points...</h3>
-              <p className="text-sm text-[#a3a3a3]">Consulting Gemini for {city} market</p>
+              <p className="text-sm text-[#a3a3a3]">Consulting FaidaHai AI for {city} market</p>
               
               <div className="w-full max-w-xs mt-8 space-y-3">
                 <div className="h-2 bg-[#262626] rounded-full overflow-hidden">

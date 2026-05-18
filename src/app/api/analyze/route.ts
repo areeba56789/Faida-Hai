@@ -55,8 +55,8 @@ export async function POST(req: NextRequest) {
       ).join("\n");
     }
 
-    // 4. Send Grounded Prompt to Gemini
-    const prompt = `You are an Elite Real Estate Analyst evaluating a property in ${city}, Pakistan.
+    // 4. Send Grounded Prompt to AI
+    const prompt = `You are the FaidaHai AI Agent, an elite intelligence system evaluating a property in ${city}, Pakistan.
 The target property has ${floors} floors and a total area of ${area} sqft (consider mapping this to Marla or Kanal if applicable).
 
 Here is the REAL LIVE MARKET DATA from our database containing neighborhood comparables from Zameen:
