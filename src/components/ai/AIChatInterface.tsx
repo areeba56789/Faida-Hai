@@ -49,6 +49,7 @@ export function AIChatInterface() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   
   const supabase = createClient();
 
@@ -114,29 +115,52 @@ export function AIChatInterface() {
   const handleSaveToPortfolio = async () => {
     if (!result) return;
     setIsSaving(true);
+    setSaveError(null);
     
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("Not authenticated");
+      if (!user) throw new Error("Not authenticated. Please log in again.");
       
       const parsedValue = parseToNumeric(result.estimatedValue);
-      const parsedROI = parseFloat(result.projectedROI.replace(/[^0-9.-]/g, '')) || 0;
       
-      const { error } = await supabase.from('user_portfolios').insert({
+      // Handle projectedROI as either string or number
+      let parsedROI = 0;
+      if (typeof result.projectedROI === 'number') {
+        parsedROI = result.projectedROI;
+      } else if (typeof result.projectedROI === 'string') {
+        parsedROI = parseFloat(result.projectedROI.replace(/[^0-9.-]/g, '')) || 0;
+      }
+
+      const insertPayload = {
         user_id: user.id,
         city: neighborhood,
-        floors,
-        area,
+        floors: String(floors),
+        area: String(area),
         estimated_value: parsedValue,
         projected_roi: parsedROI,
-        key_strengths: result.strengths,
-        risk_factors: result.risks
-      });
+        key_strengths: result.strengths || [],
+        risk_factors: result.risks || []
+      };
       
-      if (error) throw error;
+      console.log("[SavePortfolio] Inserting:", JSON.stringify(insertPayload));
+      
+      const { data, error, status, statusText } = await supabase.from('user_portfolios').insert(insertPayload).select();
+      
+      console.log("[SavePortfolio] Response:", { data, error, status, statusText });
+      
+      if (error) {
+        throw new Error(`${error.message} (code: ${error.code}, hint: ${error.hint || 'none'})`);
+      }
+      
+      if (!data || data.length === 0) {
+        throw new Error("Insert returned no data — RLS may be blocking. Check Supabase policies.");
+      }
+      
       setSaveSuccess(true);
     } catch (err: any) {
-      console.error("Failed to save to portfolio:", err);
+      console.error("[SavePortfolio] FAILED:", err);
+      const msg = err.message || 'Unknown error';
+      setSaveError(msg);
     } finally {
       setIsSaving(false);
     }
@@ -300,34 +324,43 @@ export function AIChatInterface() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
-                <button
-                  onClick={reset}
-                  className="text-sm text-[#a3a3a3] hover:text-white transition-colors"
-                >
-                  New Analysis
-                </button>
-                <button
-                  onClick={handleSaveToPortfolio}
-                  disabled={isSaving || saveSuccess}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2 transition-all ${
-                    saveSuccess 
-                      ? "bg-green-500/10 text-[#10B981] border border-green-500/30" 
-                      : "bg-[#1f1f1f] hover:bg-[#262626] text-white border border-[#262626]"
-                  }`}
-                >
-                  {saveSuccess ? (
-                    <>
-                      <Check className="w-4 h-4" />
-                      <span>Saved to Portfolio!</span>
-                    </>
-                  ) : (
-                    <>
-                      <BookmarkPlus className="w-4 h-4" />
-                      <span>{isSaving ? "Saving..." : "Add to Portfolio"}</span>
-                    </>
-                  )}
-                </button>
+              <div className="pt-4 border-t border-[#262626] space-y-3">
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={reset}
+                    className="text-sm text-[#a3a3a3] hover:text-white transition-colors"
+                  >
+                    New Analysis
+                  </button>
+                  <button
+                    onClick={handleSaveToPortfolio}
+                    disabled={isSaving || saveSuccess}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2 transition-all ${
+                      saveSuccess 
+                        ? "bg-green-500/10 text-[#10B981] border border-green-500/30" 
+                        : saveError
+                          ? "bg-red-500/10 text-red-400 border border-red-500/30"
+                          : "bg-[#1f1f1f] hover:bg-[#262626] text-white border border-[#262626]"
+                    }`}
+                  >
+                    {saveSuccess ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        <span>Saved to Portfolio!</span>
+                      </>
+                    ) : (
+                      <>
+                        <BookmarkPlus className="w-4 h-4" />
+                        <span>{isSaving ? "Saving..." : saveError ? "Retry Save" : "Add to Portfolio"}</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+                {saveError && (
+                  <div className="text-xs text-red-400 bg-red-500/5 border border-red-500/20 rounded-lg p-3 break-words">
+                    <strong>Save failed:</strong> {saveError}
+                  </div>
+                )}
               </div>
             </motion.div>
           )}
