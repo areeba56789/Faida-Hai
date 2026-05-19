@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FaidaHai - Areeba Presentation Guide</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@page {
+  margin: 1.2cm 1.5cm;
+  @bottom-center { content: counter(page); font-size: 10px; color: #737373; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  line-height: 1.75;
+  font-size: 14px;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 2em 0 0.5em 0;
+  color: #ffffff;
+  border-bottom: 2px solid #8B5CF6;
+  padding-bottom: 12px;
+}
+
+h1:first-of-type { margin-top: 0; }
+
+h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 2em 0 0.6em 0;
+  padding-left: 14px;
+  border-left: 4px solid #8B5CF6;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #8B5CF6;
+  margin: 1.8em 0 0.5em 0;
+}
+
+h4 { font-size: 15px; font-weight: 700; color: #ffffff; margin: 1.4em 0 0.4em 0; }
+
+p { margin: 0.6em 0; color: #d4d4d4; }
+
+strong { color: #ffffff; font-weight: 700; }
+
+em { color: #a3a3a3; }
+
+a { color: #8B5CF6; text-decoration: none; }
+
+hr {
+  border: none;
+  border-top: 1px solid #262626;
+  margin: 2em 0;
+}
+
+ul, ol {
+  padding-left: 1.6em;
+  margin: 0.6em 0;
+}
+
+li { margin: 0.3em 0; color: #d4d4d4; }
+
+blockquote {
+  border-left: 4px solid #8B5CF6;
+  background: #141414;
+  padding: 16px 20px;
+  margin: 1em 0;
+  border-radius: 0 12px 12px 0;
+  color: #a3a3a3;
+  font-style: italic;
+}
+
+blockquote strong { color: #ffffff; }
+
+code {
+  background: #1a1a1a;
+  color: #8B5CF6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+
+pre {
+  background: #111111;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 1em 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: #a3a3a3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 13px;
+}
+
+thead {
+  background: #141414;
+}
+
+th {
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 700;
+  color: #ffffff;
+  border-bottom: 2px solid #8B5CF6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #1a1a1a;
+  color: #d4d4d4;
+}
+
+tr:hover td { background: #141414; }
+
+.cover-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  text-align: center;
+  page-break-after: always;
+}
+
+.cover-page h1 {
+  font-size: 42px;
+  border: none;
+  background: linear-gradient(135deg, #8B5CF6, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.cover-page .subtitle {
+  font-size: 20px;
+  color: #a3a3a3;
+  font-weight: 400;
+}
+
+.cover-page .presenter {
+  margin-top: 40px;
+  padding: 16px 32px;
+  background: #141414;
+  border: 1px solid #262626;
+  border-radius: 16px;
+  font-size: 16px;
+  color: #8B5CF6;
+  font-weight: 600;
+}
+
+.cover-page .logo {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.footer-sig {
+  text-align: right;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #262626;
+  color: #525252;
+  font-style: italic;
+  font-size: 12px;
+}
+</style>
+</head>
+<body>
+  <div class="cover-page">
+    <div class="logo">🎨</div>
+    <h1>FaidaHai</h1>
+    <p class="subtitle">The Frontend, UI/UX & 3D Engine</p>
+    <div class="presenter">Presenter: Areeba</div>
+    <p style="margin-top: 60px; color: #525252; font-size: 13px;">Complete Study Guide &amp; Presentation Preparation</p>
+    <p style="color: #525252; font-size: 12px;">Incubated at the Adan IT Center</p>
+  </div>
+  <h1>🎨 FaidaHai — The Frontend, UI/UX &amp; 3D Engine</h1>
+<h3>Presenter: Areeba | Role: Frontend &amp; 3D Engineering</h3>
+<h3>Complete Study Guide — Read This Fully Before the Presentation</h3>
+<hr>
+<h2>PART 1: What is FaidaHai? (Start Here)</h2>
+<p>FaidaHai is a <strong>website</strong> that uses AI to help people invest smarter in Pakistani real estate. Users search a neighborhood, and within seconds, the AI gives them a complete investment report.</p>
+<p><strong>Your role in this presentation:</strong> Show off and explain everything the user SEES — the pages, the design, the 3D elements, the charts, the animations, the colors. You are the expert on the user experience.</p>
+<hr>
+<h2>PART 2: What is &quot;Frontend&quot;? (From Absolute Zero)</h2>
+<h3>The Two Parts of a Website</h3>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What It Is</th>
+<th>Analogy</th>
+<th>Your Focus?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Frontend</strong></td>
+<td>Everything users SEE and TOUCH</td>
+<td>The dining area of a restaurant — decor, menu, tables</td>
+<td>✅ YES — This is YOU</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>Everything that happens behind the scenes</td>
+<td>The kitchen — cooking, storage, refrigeration</td>
+<td>❌ Eman covers this</td>
+</tr>
+</tbody></table>
+<h3>What Does a Frontend Developer Do?</h3>
+<p>A frontend developer decides:</p>
+<ul>
+<li>What the website LOOKS like (colors, fonts, spacing)</li>
+<li>How users INTERACT with it (clicking buttons, typing in forms)</li>
+<li>What ANIMATIONS play (things sliding in, fading, rotating)</li>
+<li>How INFORMATION is displayed (charts, tables, cards)</li>
+<li>How it works on DIFFERENT DEVICES (laptop, tablet, phone)</li>
+</ul>
+<h3>The Three Core Technologies of Every Website</h3>
+<p>Every single website in the world uses these three:</p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>What It Does</th>
+<th>Analogy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>HTML</strong></td>
+<td>Defines the STRUCTURE — what&#39;s on the page</td>
+<td>The skeleton of a building — walls, rooms, doors</td>
+</tr>
+<tr>
+<td><strong>CSS</strong></td>
+<td>Defines the STYLE — how things look</td>
+<td>Interior design — paint, curtains, furniture</td>
+</tr>
+<tr>
+<td><strong>JavaScript</strong></td>
+<td>Defines the BEHAVIOR — what happens when you interact</td>
+<td>The electrical system — lights turn on when you flip switches</td>
+</tr>
+</tbody></table>
+<p><strong>FaidaHai uses all three</strong>, but we use more advanced versions:</p>
+<ul>
+<li>Instead of raw HTML, we use <strong>React</strong> (which generates HTML)</li>
+<li>Instead of raw CSS, we use <strong>Tailwind CSS</strong> (a faster way to write CSS)</li>
+<li>Instead of raw JavaScript, we use <strong>TypeScript</strong> (safer JavaScript)</li>
+</ul>
+<hr>
+<h2>PART 3: Our Frontend Tools (The Complete Toolkit)</h2>
+<h3>React — The Building Blocks</h3>
+<p><strong>What is React?</strong>
+React is a JavaScript library created by <strong>Facebook/Meta</strong> in 2013. It&#39;s the <strong>#1 most popular tool</strong> for building web interfaces in the entire world.</p>
+<p><strong>Why is it special?</strong>
+React lets you build a website out of <strong>&quot;components&quot;</strong> — small, reusable pieces. Think of LEGO blocks:</p>
+<pre><code>┌─────────────────────────────────────────────────────┐
+│ HEADER COMPONENT (logo, navigation, user name)       │
+├─────────────┬───────────────────────────────────────┤
+│  SIDEBAR    │        MAIN CONTENT                    │
+│  COMPONENT  │  ┌──────────┐ ┌──────────┐            │
+│             │  │ METRIC   │ │ METRIC   │            │
+│ - Overview  │  │ CARD     │ │ CARD     │            │
+│ - Analytics │  │ component│ │ component│            │
+│ - Heatmap   │  └──────────┘ └──────────┘            │
+│ - Settings  │  ┌────────────────────────┐            │
+│             │  │     3D MODEL           │            │
+│             │  │     component          │            │
+│             │  └────────────────────────┘            │
+├─────────────┴───────────────────────────────────────┤
+│ FOOTER COMPONENT (links, copyright)                  │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<p>Each box is a &quot;component.&quot; You build it once, and reuse it everywhere.</p>
+<p><strong>Who else uses React?</strong> Instagram, Netflix, Airbnb, WhatsApp Web, Uber, Dropbox.</p>
+<h3>Next.js — The Framework</h3>
+<p><strong>What is a framework?</strong>
+If React gives you LEGO blocks, <strong>Next.js</strong> gives you the LEGO instruction manual + table + storage box.</p>
+<p>Next.js adds:</p>
+<ul>
+<li><strong>Routing:</strong> When you go to <code>/dashboard</code>, Next.js automatically loads the dashboard page. When you go to <code>/analytics</code>, it loads the analytics page. We don&#39;t have to write navigation code manually.</li>
+<li><strong>Performance:</strong> It pre-builds pages for faster loading.</li>
+<li><strong>Server capabilities:</strong> It can run backend code too (API routes).</li>
+</ul>
+<p><strong>Version we use:</strong> Next.js 16 (the latest version, released 2026).</p>
+<h3>Tailwind CSS — The Styling System</h3>
+<p><strong>What is CSS?</strong>
+CSS (Cascading Style Sheets) controls how things LOOK — colors, sizes, spacing, borders, shadows.</p>
+<p><strong>Normal CSS (old way):</strong>
+You write a separate file with style rules:</p>
+<pre><code class="language-css">.button {
+    background-color: green;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+}
+</code></pre>
+<p><strong>Tailwind CSS (our way):</strong>
+You write styles directly on the element:</p>
+<pre><code class="language-html">&lt;button class=&quot;bg-green-500 p-3 rounded-lg text-white&quot;&gt;
+</code></pre>
+<p><strong>Why Tailwind?</strong></p>
+<ul>
+<li>Faster to write (no switching between files)</li>
+<li>Consistent spacing and colors across the entire site</li>
+<li>Easy to maintain — style is right next to the element</li>
+<li>Very small file size — only the styles we use are included</li>
+</ul>
+<h3>Framer Motion — The Animation Engine</h3>
+<p><strong>What are animations?</strong>
+When you see:</p>
+<ul>
+<li>A card sliding in from the left ← That&#39;s an animation</li>
+<li>Text fading into view ← That&#39;s an animation</li>
+<li>A button growing slightly when you hover ← That&#39;s an animation</li>
+<li>The header shrinking into a capsule on scroll ← That&#39;s an animation</li>
+</ul>
+<p><strong>Framer Motion</strong> is a React library that makes these animations easy and smooth. Instead of complex code, you write:</p>
+<pre><code>&quot;Start invisible and below → animate to visible and in-place&quot;
+</code></pre>
+<p>And Framer Motion handles all the smooth movement between the two states.</p>
+<h3>Recharts — The Chart Library</h3>
+<p><strong>What is Recharts?</strong>
+It&#39;s a React library for creating beautiful, interactive charts:</p>
+<ul>
+<li><strong>Pie Charts</strong> (circle divided into colored slices) — we use this for city distribution</li>
+<li><strong>Bar Charts</strong> (vertical bars comparing values) — we use this for ROI comparison</li>
+<li><strong>Area Charts</strong> (line with colored area below) — we use this for search activity over time</li>
+<li><strong>Donut Charts</strong> (pie chart with a hole in the middle) — we use this on city pages</li>
+</ul>
+<p>All charts are INTERACTIVE — you can hover to see exact values.</p>
+<h3>React Three Fiber — The 3D Engine</h3>
+<p><strong>What is 3D on the web?</strong>
+Normally, websites are &quot;flat&quot; — 2D. But modern technology allows us to render <strong>3D objects</strong> directly in the browser. No app download needed. Users can rotate, zoom, and interact with 3D models.</p>
+<p><strong>React Three Fiber</strong> is a library that lets us build 3D scenes using React. We use it for:</p>
+<ol>
+<li>The apartment building on the dashboard (Building 19)</li>
+<li>The floating shapes on the landing page</li>
+<li>The geometric background on the login page</li>
+</ol>
+<p><strong>WebGL</strong> is the underlying technology — it&#39;s a browser API that talks directly to your graphics card (GPU) to render 3D in real-time at 60 frames per second.</p>
+<h3>Lucide React — The Icon Library</h3>
+<p>Every icon in FaidaHai comes from <strong>Lucide</strong> — a modern, open-source icon set. We use icons for:</p>
+<ul>
+<li>Navigation (Dashboard, Properties, Heatmap, Analytics)</li>
+<li>Actions (Search, Settings, Logout)</li>
+<li>Indicators (TrendingUp, Building, DollarSign, Shield)</li>
+</ul>
+<hr>
+<h2>PART 4: Every Page Explained in Detail</h2>
+<h3>Page Map (All 15+ Pages)</h3>
+<pre><code>PUBLIC PAGES (anyone can see):
+├── /                  ← Landing Page (the first page visitors see)
+├── /login             ← Login &amp; Signup
+├── /about             ← Team / Neural Architects
+├── /faq               ← Frequently Asked Questions
+├── /contact           ← Contact Information
+├── /terms             ← Terms of Service
+├── /privacy           ← Privacy Policy
+├── /locations/gujrat  ← Gujrat City Page
+└── /locations/lahore  ← Lahore City Page
+
+PROTECTED PAGES (must be logged in):
+├── /dashboard              ← Overview (metrics, 3D model, AI chat)
+├── /dashboard/analytics    ← Full analytics with charts
+├── /dashboard/heatmap      ← Mapbox terrain view
+├── /dashboard/settings     ← Profile &amp; account management
+└── /properties             ← Property listings
+</code></pre>
+<hr>
+<h3>🏠 Landing Page (<code>/</code>) — The First Impression</h3>
+<p>This is the MOST IMPORTANT page. It&#39;s what visitors see first. It must make them think: &quot;This is a premium, professional product.&quot;</p>
+<p><strong>Components on this page:</strong></p>
+<p><strong>1. The Capsule Header</strong></p>
+<ul>
+<li>Starts as a full-width navigation bar at the top</li>
+<li>When you scroll down, it transforms into a floating, rounded pill shape (capsule)</li>
+<li>Has a frosted-glass effect (glassmorphism — semi-transparent with blur)</li>
+<li>Contains: Logo, nav links, Locations dropdown, &quot;Get Started&quot; button</li>
+<li>The Locations dropdown shows Gujrat and Lahore with their top investments</li>
+</ul>
+<p><strong>2. The Hero Section</strong></p>
+<ul>
+<li>Large headline text: The &quot;Palantir of Real Estate&quot; tagline</li>
+<li>Subtitle explaining what FaidaHai does</li>
+<li>An email capture form — NOT a generic &quot;Sign Up&quot; button</li>
+<li>When someone types their email and clicks &quot;Get Started,&quot; they&#39;re taken to <code>/login</code> with their email already pre-filled (no retyping!)</li>
+</ul>
+<p><strong>3. 3D Floating City</strong></p>
+<ul>
+<li>Behind the hero text, there&#39;s a 3D scene with abstract geometric shapes</li>
+<li>Shapes slowly rotate and float using React Three Fiber</li>
+<li>Creates depth and a futuristic feel</li>
+</ul>
+<p><strong>4. Features Section</strong></p>
+<ul>
+<li>Cards explaining key features (AI Analysis, Portfolio Tracking, Market Heatmap)</li>
+<li>Each card has an icon, title, and description</li>
+</ul>
+<p><strong>5. FAQ Section</strong></p>
+<ul>
+<li>Common questions and answers in collapsible cards</li>
+<li>Clean, dark design matching the overall aesthetic</li>
+</ul>
+<p><strong>6. Team Section (Neural Architects)</strong></p>
+<ul>
+<li>Three team member cards with hover animations</li>
+<li>Each card shows name, role, and description</li>
+</ul>
+<p><strong>7. Bottom Email Catcher</strong></p>
+<ul>
+<li>Another email capture form at the bottom of the page</li>
+<li>Catches visitors who scrolled through everything but didn&#39;t sign up at the top</li>
+</ul>
+<p><strong>8. Fat Footer</strong></p>
+<ul>
+<li>Links to all pages: About, FAQ, Contact, Terms, Privacy, Locations</li>
+<li>Copyright notice</li>
+</ul>
+<hr>
+<h3>🔐 Login Page (<code>/login</code>) — Authentication</h3>
+<p><strong>Visual Design:</strong></p>
+<ul>
+<li>Full-screen split layout</li>
+<li>Left side: Login/Signup form</li>
+<li>Background: A 3D rotating <strong>Icosahedron</strong> (a geometric shape with 20 triangular faces) in emerald green wireframe. This creates a futuristic, premium feel.</li>
+</ul>
+<p><strong>Functionality:</strong></p>
+<ul>
+<li>Tab toggle between &quot;Login&quot; and &quot;Sign Up&quot;</li>
+<li>Smart email pre-fill: If user came from the landing page email catcher, their email is already in the field and &quot;Sign Up&quot; is auto-selected</li>
+<li>Error messages for wrong passwords</li>
+<li>Redirects to <code>/dashboard</code> on successful login</li>
+</ul>
+<p><strong>How the pre-fill works (technical detail):</strong></p>
+<pre><code>Landing Page email catcher → redirects to /login?email=user@gmail.com
+Login page reads the &quot;email&quot; from the URL → puts it in the input field
+</code></pre>
+<hr>
+<h3>📊 Dashboard Overview (<code>/dashboard</code>) — The Command Center</h3>
+<p><strong>Layout:</strong></p>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│  SIDEBAR        │  HEADER (user name, profile)       │
+│  - Overview ●   ├───────────────────────────────────│
+│  - Properties   │                                    │
+│  - Heatmap      │  [Valuation] [ROI] [Properties]   │
+│  - Analytics    │  [Market Avg]                      │
+│                 │                                    │
+│  ─── Account    │  ┌─────────────┐ ┌──────────────┐ │
+│  - Settings     │  │ 3D BUILDING │ │ AI CHAT      │ │
+│  - Logout       │  │ (Building   │ │ INTERFACE    │ │
+│                 │  │  19 model)  │ │              │ │
+│                 │  └─────────────┘ └──────────────┘ │
+│                 │                                    │
+│                 │  [Recent Searches] [Chart ───────] │
+│                 │                                    │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Metric Cards (Top Row):</strong></p>
+<ul>
+<li><strong>Total Valuation:</strong> Sum of all properties in user&#39;s portfolio (in PKR Crores/Lacs)</li>
+<li><strong>Average ROI:</strong> Average projected return across all portfolio properties</li>
+<li><strong>Properties:</strong> Number of properties being tracked</li>
+<li><strong>Market Average:</strong> Average listing price from our market data</li>
+</ul>
+<p>ALL of these pull REAL data from the database. Nothing is hardcoded or fake.</p>
+<p><strong>3D Apartment Building (Building 19):</strong>
+This is the visual centerpiece. It&#39;s a procedurally generated 3D model featuring:</p>
+<ul>
+<li>A 6-story apartment building with dark glass walls</li>
+<li>Emerald green glowing windows (randomly lit for realism)</li>
+<li>An entrance with an emerald green awning</li>
+<li>A rooftop with an AC unit</li>
+<li>4 trees with green foliage</li>
+<li>3 parked cars (blue, red, yellow) in different orientations</li>
+<li>A floating &quot;BUILDING 19 — Premium Residential&quot; label</li>
+<li>A ground plate with a grid pattern</li>
+<li>Smooth auto-rotation with orbit controls (click and drag to rotate)</li>
+<li>All built in code — no external 3D model file</li>
+</ul>
+<p><strong>The AI Chat Interface:</strong></p>
+<ul>
+<li>Text input where users type their query</li>
+<li>The interface validates input — blocks empty or gibberish submissions</li>
+<li>Shows loading animation while AI processes</li>
+<li>Displays the full result: estimated value, ROI, strengths, risks</li>
+<li>All results are saved to search history</li>
+</ul>
+<p><strong>Dynamic Analytics Chart:</strong></p>
+<ul>
+<li>Shows &quot;Profit vs Investment&quot; over time</li>
+<li>Calculates a 7-month historical curve based on the user&#39;s ACTUAL portfolio value and ROI</li>
+<li>Not mocked — the curve is mathematically generated from real data</li>
+</ul>
+<hr>
+<h3>📈 Analytics Page (<code>/dashboard/analytics</code>) — Deep Data</h3>
+<p><strong>KPI Cards (Top):</strong> Total Portfolio Value, Average ROI, Asset Count, AI Query Count</p>
+<p><strong>City Distribution (Donut Chart):</strong></p>
+<ul>
+<li>Shows what percentage of your portfolio is in each city</li>
+<li>E.g., 60% Lahore, 40% Gujrat</li>
+<li>Interactive — hover for exact numbers</li>
+</ul>
+<p><strong>ROI Comparison (Bar Chart):</strong></p>
+<ul>
+<li>Each bar represents one property in your portfolio</li>
+<li>Bar height = the projected ROI percentage</li>
+<li>Easy visual comparison of which investments are performing best</li>
+</ul>
+<p><strong>AI Search Activity (Area Chart):</strong></p>
+<ul>
+<li>Shows how many AI queries you&#39;ve made over time</li>
+<li>Helps track your research intensity</li>
+</ul>
+<p><strong>Portfolio Ledger (Table):</strong></p>
+<ul>
+<li>Full spreadsheet-style view of every property</li>
+<li>Columns: Property Name, City, Estimated Value, ROI</li>
+<li>Positive ROI shown in green, negative in red</li>
+</ul>
+<hr>
+<h3>🗺️ Heatmap Page (<code>/dashboard/heatmap</code>) — Spatial View</h3>
+<p><strong>Mapbox Integration:</strong></p>
+<ul>
+<li>Full-width dark-themed map of Pakistan using Mapbox</li>
+<li>Mapbox is a mapping platform used by Uber, Facebook, and the New York Times</li>
+<li>Shows Pakistan centered with terrain view</li>
+<li>Floating overlays show live coverage stats and &quot;Data Streaming&quot; badge</li>
+</ul>
+<p><strong>City Breakdown Cards:</strong></p>
+<ul>
+<li>Below the map, each city in your portfolio gets a card</li>
+<li>Shows: property count, total value, and a progress bar</li>
+<li>Progress bar shows what % of your total portfolio is in that city</li>
+</ul>
+<hr>
+<h3>⚙️ Settings Page (<code>/dashboard/settings</code>)</h3>
+<p>Three sections:</p>
+<p><strong>Profile Section:</strong></p>
+<ul>
+<li>Edit display name</li>
+<li>Shows current email (read-only)</li>
+<li>&quot;Save Changes&quot; button with success confirmation</li>
+</ul>
+<p><strong>Security Section:</strong></p>
+<ul>
+<li>Shows that account is protected by RLS</li>
+<li>Explains that password resets go through email</li>
+</ul>
+<p><strong>Danger Zone (Red Section):</strong></p>
+<ul>
+<li>&quot;Delete My Account&quot; button</li>
+<li>Opens a CONFIRMATION MODAL</li>
+<li>User must type &quot;DELETE&quot; exactly</li>
+<li>Triggers secure server-side deletion</li>
+<li>Permanently removes ALL data (irreversible)</li>
+</ul>
+<hr>
+<h3>📍 City Pages (<code>/locations/gujrat</code> and <code>/locations/lahore</code>)</h3>
+<p><strong>Full marketing pages for each city. Contains:</strong></p>
+<ol>
+<li><strong>Hero:</strong> City name, subtitle, market intelligence badge</li>
+<li><strong>&quot;Why [City]?&quot; section:</strong> Paragraph explaining the investment opportunity</li>
+<li><strong>Top 3 Investments:</strong> Cards with descriptions of the hottest properties</li>
+<li><strong>Interactive Pie Chart:</strong> Shows market yield projections (e.g., Chenab Orchard 18.5%, Citi Housing 14.2%, Market Average 8.5%)</li>
+<li><strong>&quot;Verified Intelligence&quot; badge:</strong> Explains data sourcing</li>
+<li><strong>Email Catcher:</strong> Captures leads at the bottom</li>
+</ol>
+<hr>
+<h2>PART 5: Design Decisions (Why Everything Looks This Way)</h2>
+<h3>The Color Palette</h3>
+<table>
+<thead>
+<tr>
+<th>Color</th>
+<th>Hex Code</th>
+<th>Where It&#39;s Used</th>
+<th>Psychology</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Near Black</strong></td>
+<td><code>#0a0a0a</code></td>
+<td>All backgrounds</td>
+<td>Premium, professional, reduces eye strain</td>
+</tr>
+<tr>
+<td><strong>Dark Gray</strong></td>
+<td><code>#141414</code></td>
+<td>Cards, panels</td>
+<td>Creates depth against the black background</td>
+</tr>
+<tr>
+<td><strong>Border Gray</strong></td>
+<td><code>#262626</code></td>
+<td>All borders, dividers</td>
+<td>Subtle separation without harshness</td>
+</tr>
+<tr>
+<td><strong>Text Gray</strong></td>
+<td><code>#a3a3a3</code></td>
+<td>Secondary text</td>
+<td>Readable but not distracting</td>
+</tr>
+<tr>
+<td><strong>Emerald Green</strong></td>
+<td><code>#10B981</code></td>
+<td>Primary accent — buttons, active states, highlights</td>
+<td>Money, growth, success, nature</td>
+</tr>
+<tr>
+<td><strong>Blue</strong></td>
+<td><code>#3B82F6</code></td>
+<td>Secondary accent — analytics, data elements</td>
+<td>Trust, stability, intelligence</td>
+</tr>
+<tr>
+<td><strong>Purple</strong></td>
+<td><code>#8B5CF6</code></td>
+<td>Tertiary — some chart elements</td>
+<td>Premium, luxury, creativity</td>
+</tr>
+<tr>
+<td><strong>Red</strong></td>
+<td><code>#EF4444</code></td>
+<td>Danger zone, negative ROI</td>
+<td>Warning, danger, attention</td>
+</tr>
+</tbody></table>
+<h3>Why Dark Mode?</h3>
+<table>
+<thead>
+<tr>
+<th>Reason</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Premium feel</strong></td>
+<td>Bloomberg Terminal, trading platforms, all financial tools use dark mode</td>
+</tr>
+<tr>
+<td><strong>Eye comfort</strong></td>
+<td>Users analyzing data spend hours looking at screens — dark mode reduces strain</td>
+</tr>
+<tr>
+<td><strong>Color contrast</strong></td>
+<td>Green and blue look 10x better on black than on white</td>
+</tr>
+<tr>
+<td><strong>Modern standard</strong></td>
+<td>Every serious SaaS in 2026 has dark mode</td>
+</tr>
+<tr>
+<td><strong>Professionalism</strong></td>
+<td>Light mode with bright colors looks &quot;consumer-grade&quot; — dark mode looks &quot;enterprise-grade&quot;</td>
+</tr>
+</tbody></table>
+<h3>What is Glassmorphism?</h3>
+<p>It&#39;s the <strong>frosted glass effect</strong> you see on the capsule header and some cards. Achieved with:</p>
+<ul>
+<li>Semi-transparent backgrounds (you can slightly see through)</li>
+<li>Background blur (content behind is blurred, like looking through frosted glass)</li>
+<li>Subtle light borders</li>
+</ul>
+<p>This creates a sense of <strong>depth and layers</strong>, making the interface feel 3D even in 2D areas.</p>
+<h3>Typography (Fonts)</h3>
+<p>We use the <strong>Inter</strong> font family — designed specifically for computer screens. It&#39;s:</p>
+<ul>
+<li>Highly readable at small sizes</li>
+<li>Clean and modern</li>
+<li>Used by GitHub, Figma, and Linear (top tech products)</li>
+</ul>
+<hr>
+<h2>PART 6: What is &quot;Responsive Design&quot;?</h2>
+<p>Responsive design means the website <strong>automatically adjusts</strong> to fit any screen size:</p>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>What Happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Desktop (1920px)</strong></td>
+<td>Full layout — sidebar visible, 3-column grids, all charts side by side</td>
+</tr>
+<tr>
+<td><strong>Tablet (768px)</strong></td>
+<td>Sidebar may collapse, 2-column grids, slightly smaller charts</td>
+</tr>
+<tr>
+<td><strong>Mobile (375px)</strong></td>
+<td>Single column layout, everything stacks vertically, hamburger menu</td>
+</tr>
+</tbody></table>
+<p>We achieve this with Tailwind CSS classes like:</p>
+<ul>
+<li><code>grid-cols-1</code> → 1 column on mobile</li>
+<li><code>md:grid-cols-2</code> → 2 columns on medium screens</li>
+<li><code>lg:grid-cols-4</code> → 4 columns on large screens</li>
+</ul>
+<hr>
+<h2>PART 7: Complete Q&amp;A Preparation</h2>
+<h3>Q: &quot;What framework/library did you use for the frontend?&quot;</h3>
+<blockquote>
+<p>&quot;React with Next.js 16 — the same stack used by Instagram, Netflix, TikTok, and Airbnb. React is the #1 frontend library in the world, created by Facebook&#39;s engineering team.&quot;</p>
+</blockquote>
+<h3>Q: &quot;Why does it look so dark?&quot;</h3>
+<blockquote>
+<p>&quot;We deliberately chose a dark-mode design because it&#39;s the standard for financial and analytics platforms — like Bloomberg Terminal. It reduces eye strain during long data analysis sessions, and our emerald green accent colors look far more premium against a dark background.&quot;</p>
+</blockquote>
+<h3>Q: &quot;Is the 3D real?&quot;</h3>
+<blockquote>
+<p>&quot;Yes, everything 3D is rendered in real-time using WebGL through React Three Fiber. The Building 19 apartment model, the floating shapes on the landing page, and the login background — all live, interactive 3D. You can rotate and zoom with your mouse.&quot;</p>
+</blockquote>
+<h3>Q: &quot;How many pages does this have?&quot;</h3>
+<blockquote>
+<p>&quot;Over 15 unique pages — a long-scroll landing page, authentication, a full dashboard with overview, independent analytics, a Mapbox heatmap, user settings, city-specific marketing pages for Gujrat and Lahore, plus legal and informational pages.&quot;</p>
+</blockquote>
+<h3>Q: &quot;What charts do you use?&quot;</h3>
+<blockquote>
+<p>&quot;We use Recharts — a React-based charting library. We have pie charts for portfolio distribution, bar charts for ROI comparison, area charts for activity tracking, and full data tables. All charts are interactive — hover to see values.&quot;</p>
+</blockquote>
+<h3>Q: &quot;Is it mobile responsive?&quot;</h3>
+<blockquote>
+<p>&quot;Yes. The layout automatically adapts to any screen size using Tailwind CSS responsive utilities. On mobile, the sidebar collapses and content stacks vertically.&quot;</p>
+</blockquote>
+<h3>Q: &quot;What animations do you use?&quot;</h3>
+<blockquote>
+<p>&quot;Framer Motion handles all our animations — elements sliding in, fading, scaling, and the capsule header transformation. All animations run at 60fps for a smooth, premium experience.&quot;</p>
+</blockquote>
+<h3>Q: &quot;How does the email pre-fill work?&quot;</h3>
+<blockquote>
+<p>&quot;When a visitor enters their email on the landing page and clicks &#39;Get Started,&#39; we pass their email through the URL as a parameter. The login page reads this parameter and automatically fills in the email field, so the user doesn&#39;t have to type it again. It&#39;s a seamless conversion optimization.&quot;</p>
+</blockquote>
+<h3>Q: &quot;What is the capsule header?&quot;</h3>
+<blockquote>
+<p>&quot;On the landing page, the navigation bar starts as a full-width bar. As you scroll down, it transforms into a floating, rounded capsule shape with a glassmorphic (frosted glass) effect. This is a modern design pattern that saves space while keeping navigation accessible.&quot;</p>
+</blockquote>
+<h3>Q: &quot;Why didn&#39;t you use photos for the city pages?&quot;</h3>
+<blockquote>
+<p>&quot;We deliberately chose data-driven visualizations over static photographs. Interactive pie charts showing market yield projections provide more actionable intelligence than a photo ever could. This reinforces our positioning as a data platform, not a real estate listing site.&quot;</p>
+</blockquote>
+<hr>
+<h2>PART 8: Key Terms Glossary</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Simple Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Frontend</strong></td>
+<td>Everything the user sees and interacts with on a website</td>
+</tr>
+<tr>
+<td><strong>React</strong></td>
+<td>Facebook&#39;s library for building user interfaces (the most popular in the world)</td>
+</tr>
+<tr>
+<td><strong>Next.js</strong></td>
+<td>A framework built on React that adds routing, performance, and server features</td>
+</tr>
+<tr>
+<td><strong>Component</strong></td>
+<td>A reusable building block of a React interface (like a LEGO piece)</td>
+</tr>
+<tr>
+<td><strong>Tailwind CSS</strong></td>
+<td>A utility-first CSS framework for rapid styling</td>
+</tr>
+<tr>
+<td><strong>Framer Motion</strong></td>
+<td>A React animation library for smooth transitions</td>
+</tr>
+<tr>
+<td><strong>Recharts</strong></td>
+<td>A React library for creating interactive charts</td>
+</tr>
+<tr>
+<td><strong>React Three Fiber</strong></td>
+<td>A React library for rendering 3D objects in the browser</td>
+</tr>
+<tr>
+<td><strong>WebGL</strong></td>
+<td>Browser technology that enables 3D graphics</td>
+</tr>
+<tr>
+<td><strong>Glassmorphism</strong></td>
+<td>A design trend using frosted glass effects</td>
+</tr>
+<tr>
+<td><strong>Responsive Design</strong></td>
+<td>Design that adapts to different screen sizes automatically</td>
+</tr>
+<tr>
+<td><strong>Dark Mode</strong></td>
+<td>UI design using dark backgrounds with light text</td>
+</tr>
+<tr>
+<td><strong>UI</strong></td>
+<td>User Interface — the visual design of an application</td>
+</tr>
+<tr>
+<td><strong>UX</strong></td>
+<td>User Experience — how easy and pleasant it is to use the app</td>
+</tr>
+<tr>
+<td><strong>Lucide</strong></td>
+<td>An open-source icon library used for consistent iconography</td>
+</tr>
+<tr>
+<td><strong>CDN</strong></td>
+<td>Content Delivery Network — servers worldwide for fast page loading</td>
+</tr>
+<tr>
+<td><strong>SPA</strong></td>
+<td>Single Page Application — app that loads once and navigates without reloading</td>
+</tr>
+<tr>
+<td><strong>Hover Effect</strong></td>
+<td>Visual change when mouse cursor moves over an element</td>
+</tr>
+<tr>
+<td><strong>Modal</strong></td>
+<td>A popup overlay (like the delete confirmation dialog)</td>
+</tr>
+<tr>
+<td><strong>Pre-fill</strong></td>
+<td>Automatically filling in a form field based on previous input</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>PART 9: Numbers &amp; Facts to Memorize</h2>
+<ul>
+<li>🎨 <strong>UI Framework:</strong> React + Next.js 16 (used by Netflix, Instagram)</li>
+<li>🌑 <strong>Design:</strong> Dark Mode with Glassmorphism</li>
+<li>📊 <strong>Charts:</strong> Recharts — 4 chart types (Pie, Bar, Area, Table)</li>
+<li>🏢 <strong>3D Engine:</strong> React Three Fiber (real-time WebGL at 60fps)</li>
+<li>✨ <strong>Animations:</strong> Framer Motion</li>
+<li>📱 <strong>Pages:</strong> 15+ unique pages</li>
+<li>🎨 <strong>Primary Color:</strong> Emerald Green (<code>#10B981</code>)</li>
+<li>🔤 <strong>Font:</strong> Inter (used by GitHub, Figma)</li>
+<li>🎭 <strong>Styling:</strong> Tailwind CSS (utility-first)</li>
+<li>🖼️ <strong>Icons:</strong> Lucide React (open-source, consistent)</li>
+<li>📐 <strong>Responsive:</strong> Works on Desktop, Tablet, Mobile</li>
+<li>🏗️ <strong>3D Assets:</strong> Building 19 (6 floors, trees, cars, floating label)</li>
+</ul>
+<hr>
+<div align="right">
+<i>made with love by HAMZA</i>
+</div>
+
+</body>
+</html>

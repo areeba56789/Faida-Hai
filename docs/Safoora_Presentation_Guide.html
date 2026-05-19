@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FaidaHai - Safoora Presentation Guide</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@page {
+  margin: 1.2cm 1.5cm;
+  @bottom-center { content: counter(page); font-size: 10px; color: #737373; }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  line-height: 1.75;
+  font-size: 14px;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 2em 0 0.5em 0;
+  color: #ffffff;
+  border-bottom: 2px solid #10B981;
+  padding-bottom: 12px;
+}
+
+h1:first-of-type { margin-top: 0; }
+
+h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 2em 0 0.6em 0;
+  padding-left: 14px;
+  border-left: 4px solid #10B981;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #10B981;
+  margin: 1.8em 0 0.5em 0;
+}
+
+h4 { font-size: 15px; font-weight: 700; color: #ffffff; margin: 1.4em 0 0.4em 0; }
+
+p { margin: 0.6em 0; color: #d4d4d4; }
+
+strong { color: #ffffff; font-weight: 700; }
+
+em { color: #a3a3a3; }
+
+a { color: #10B981; text-decoration: none; }
+
+hr {
+  border: none;
+  border-top: 1px solid #262626;
+  margin: 2em 0;
+}
+
+ul, ol {
+  padding-left: 1.6em;
+  margin: 0.6em 0;
+}
+
+li { margin: 0.3em 0; color: #d4d4d4; }
+
+blockquote {
+  border-left: 4px solid #10B981;
+  background: #141414;
+  padding: 16px 20px;
+  margin: 1em 0;
+  border-radius: 0 12px 12px 0;
+  color: #a3a3a3;
+  font-style: italic;
+}
+
+blockquote strong { color: #ffffff; }
+
+code {
+  background: #1a1a1a;
+  color: #10B981;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+}
+
+pre {
+  background: #111111;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 20px;
+  overflow-x: auto;
+  margin: 1em 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+  color: #a3a3a3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: 13px;
+}
+
+thead {
+  background: #141414;
+}
+
+th {
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 700;
+  color: #ffffff;
+  border-bottom: 2px solid #10B981;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #1a1a1a;
+  color: #d4d4d4;
+}
+
+tr:hover td { background: #141414; }
+
+.cover-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  text-align: center;
+  page-break-after: always;
+}
+
+.cover-page h1 {
+  font-size: 42px;
+  border: none;
+  background: linear-gradient(135deg, #10B981, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.cover-page .subtitle {
+  font-size: 20px;
+  color: #a3a3a3;
+  font-weight: 400;
+}
+
+.cover-page .presenter {
+  margin-top: 40px;
+  padding: 16px 32px;
+  background: #141414;
+  border: 1px solid #262626;
+  border-radius: 16px;
+  font-size: 16px;
+  color: #10B981;
+  font-weight: 600;
+}
+
+.cover-page .logo {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.footer-sig {
+  text-align: right;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #262626;
+  color: #525252;
+  font-style: italic;
+  font-size: 12px;
+}
+</style>
+</head>
+<body>
+  <div class="cover-page">
+    <div class="logo">🧠</div>
+    <h1>FaidaHai</h1>
+    <p class="subtitle">The AI Intelligence Engine</p>
+    <div class="presenter">Presenter: Safoora</div>
+    <p style="margin-top: 60px; color: #525252; font-size: 13px;">Complete Study Guide &amp; Presentation Preparation</p>
+    <p style="color: #525252; font-size: 12px;">Incubated at the Adan IT Center</p>
+  </div>
+  <h1>🧠 FaidaHai — The AI Intelligence Engine</h1>
+<h3>Presenter: Safoora | Role: AI &amp; Spatial Data Lead</h3>
+<h3>Complete Study Guide — Read This Fully Before the Presentation</h3>
+<hr>
+<h2>PART 1: What is FaidaHai? (Start Here)</h2>
+<p>FaidaHai is a <strong>website</strong> (a web application) that helps people make smarter real estate investment decisions in Pakistan using <strong>Artificial Intelligence (AI)</strong>.</p>
+<h3>The Problem We Solve</h3>
+<p>Right now, if you want to invest in property in Pakistan, you have to:</p>
+<ol>
+<li>Visit multiple dealers physically</li>
+<li>Trust brokers who may be biased (they earn commission)</li>
+<li>Guess whether a property will increase in value</li>
+<li>Have no way to compare neighborhoods scientifically</li>
+</ol>
+<h3>Our Solution</h3>
+<p>FaidaHai lets you:</p>
+<ol>
+<li>Type any neighborhood name (like &quot;DHA Phase 9&quot; or &quot;Chenab Orchard&quot;)</li>
+<li>Tell us the property size (in sqft) and number of floors</li>
+<li>Click &quot;Analyze&quot; — and within 5 seconds, get a <strong>full investment report</strong> including:<ul>
+<li>Estimated current market value (in PKR — Crores/Lacs)</li>
+<li>Projected Return on Investment (ROI) percentage</li>
+<li>Key strengths of that investment</li>
+<li>Risk factors to be aware of</li>
+</ul>
+</li>
+</ol>
+<p><strong>Think of FaidaHai as a brilliant real estate analyst that works 24/7, never sleeps, never lies, and processes thousands of data points in seconds.</strong></p>
+<hr>
+<h2>PART 2: Understanding AI (For Complete Beginners)</h2>
+<p>Before we talk about FaidaHai&#39;s AI, let&#39;s understand what AI actually is.</p>
+<h3>What is Artificial Intelligence?</h3>
+<p>AI is when a computer program can do things that normally require human intelligence:</p>
+<ul>
+<li>Understanding language (like reading a property listing)</li>
+<li>Making decisions (like estimating a property&#39;s value)</li>
+<li>Learning from data (like getting better at predictions over time)</li>
+</ul>
+<p><strong>Important:</strong> AI is NOT magic. It&#39;s math. Very complex math, but still math. It looks at patterns in data and makes predictions based on those patterns.</p>
+<h3>What is a &quot;Model&quot;?</h3>
+<p>When people say &quot;AI model,&quot; think of it like a <strong>recipe book</strong> that the AI follows. A model has been &quot;trained&quot; (taught) by showing it millions of examples. After training, it can answer new questions it has never seen before.</p>
+<p><strong>Example:</strong> If you show an AI model 10 million property listings with their prices, it learns the patterns:</p>
+<ul>
+<li>&quot;Properties in DHA are generally expensive&quot;</li>
+<li>&quot;More floors = higher value&quot;</li>
+<li>&quot;Larger area = higher price&quot;</li>
+<li>&quot;Commercial properties have different pricing than residential&quot;</li>
+</ul>
+<h3>What is Google Gemini?</h3>
+<p><strong>Gemini</strong> is Google&#39;s most advanced AI model. It&#39;s made by the same company that makes Google Search, YouTube, and Android. Gemini can:</p>
+<ul>
+<li>Read and understand text</li>
+<li>Answer complex questions</li>
+<li>Generate detailed responses</li>
+<li>Process images and documents</li>
+</ul>
+<p><strong>We use Gemini because:</strong></p>
+<ol>
+<li>It&#39;s one of the most powerful AI models in the world</li>
+<li>It&#39;s made by Google — a trusted company</li>
+<li>It can respond in structured formats (JSON — explained later)</li>
+<li>It&#39;s fast — responses come in under 5 seconds</li>
+</ol>
+<h3>What Models Do We Specifically Use?</h3>
+<table>
+<thead>
+<tr>
+<th>Model Name</th>
+<th>What It Does</th>
+<th>Simple Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Gemini 1.5 Flash</strong></td>
+<td>The &quot;thinker&quot; — generates investment reports</td>
+<td>This is the main brain. We give it data + a question, and it writes the analysis report. &quot;Flash&quot; means it&#39;s the fast version.</td>
+</tr>
+<tr>
+<td><strong>Gemini Embedding 2</strong></td>
+<td>The &quot;finder&quot; — converts text to searchable numbers</td>
+<td>This helps us find similar properties in our database. More on this below.</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>PART 3: How Our AI System Works (Step by Step)</h2>
+<p>This is the most important section. Understand this flow completely.</p>
+<h3>The Complete Flow (What Happens When a User Clicks &quot;Analyze&quot;)</h3>
+<pre><code>STEP 1: User types &quot;Chenab Orchard, 3 floors, 2000 sqft&quot;
+                    ↓
+STEP 2: Our server receives this query
+                    ↓
+STEP 3: Gemini Embedding 2 converts the query into NUMBERS
+        &quot;Chenab Orchard, 3 floors, 2000 sqft&quot; → [0.23, -0.45, 0.78, 0.12, ...]
+        (A list of 768 numbers called a &quot;vector&quot;)
+                    ↓
+STEP 4: These numbers are sent to our DATABASE to find similar properties
+        The database compares these numbers with all stored properties
+        and finds the 5 MOST SIMILAR ones
+        (This is called &quot;Vector Search&quot; or &quot;Similarity Search&quot;)
+                    ↓
+STEP 5: We now have REAL DATA — actual property listings from the market
+        Example: &quot;5 Marla in DHA Phase 8, listed at 3.2 Crore&quot;
+        Example: &quot;10 Marla in DHA Phase 9, listed at 5.8 Crore&quot;
+                    ↓
+STEP 6: We send EVERYTHING to Gemini 1.5 Flash:
+        - The user&#39;s question
+        - The real market data we found
+        - A detailed instruction (called a &quot;prompt&quot;)
+                    ↓
+STEP 7: Gemini analyzes all of this and generates:
+        {
+          &quot;estimatedValue&quot;: &quot;4.2 Crore PKR&quot;,
+          &quot;projectedROI&quot;: 14.5,
+          &quot;strengths&quot;: [&quot;Prime location&quot;, &quot;High demand area&quot;, &quot;...&quot;],
+          &quot;risks&quot;: [&quot;Market volatility&quot;, &quot;...&quot;]
+        }
+                    ↓
+STEP 8: This result is SAVED in the database (search history)
+                    ↓
+STEP 9: The result is displayed beautifully on the user&#39;s screen
+</code></pre>
+<h3>Let Me Explain Each Step in More Detail:</h3>
+<hr>
+<h3>STEP 3: What Are &quot;Embeddings&quot;? (Critical Concept)</h3>
+<p>This is the hardest concept, but also the most impressive one for your presentation.</p>
+<p><strong>The Problem:</strong> Computers don&#39;t understand words. They only understand numbers. So how do we make a computer understand that &quot;DHA Phase 8&quot; and &quot;DHA Phase 9&quot; are similar locations, but &quot;DHA Phase 8&quot; and &quot;Farmhouse in Murree&quot; are very different?</p>
+<p><strong>The Solution: Embeddings</strong></p>
+<p>An &quot;embedding&quot; is when AI converts text into a list of numbers. But not random numbers — these numbers capture the MEANING of the text.</p>
+<p><strong>Real-World Analogy:</strong></p>
+<blockquote>
+<p>Imagine you have a giant room (think of a football field). Every property listing in Pakistan is a dot placed somewhere in this room. Properties that are SIMILAR are placed CLOSE together. Properties that are DIFFERENT are placed FAR apart.</p>
+<p>So &quot;5 Marla house in DHA Phase 8 Lahore&quot; would be very close to &quot;5 Marla house in DHA Phase 9 Lahore&quot; but very far from &quot;Agricultural land in Balochistan.&quot;</p>
+<p>When a user searches for something, we convert their search into a dot too, and then find the closest dots — those are the most similar properties.</p>
+</blockquote>
+<p><strong>Technical Detail (optional for presentation):</strong>
+Each piece of text is converted into a list of <strong>768 numbers</strong>. These numbers represent the &quot;meaning&quot; in 768 different dimensions. Humans can think in 3 dimensions (length, width, height), but AI thinks in 768 dimensions!</p>
+<hr>
+<h3>STEP 4: What is &quot;Vector Search&quot;?</h3>
+<p>Once we have the numbers (the &quot;vector&quot;), we need to search our database for similar vectors.</p>
+<p><strong>Normal database search:</strong> &quot;Find all properties WHERE city = &#39;Lahore&#39;&quot; — this is exact matching.</p>
+<p><strong>Vector search:</strong> &quot;Find properties that are MOST SIMILAR to this query&quot; — this is meaning-based matching.</p>
+<p><strong>Why is this better?</strong></p>
+<ul>
+<li>If someone types &quot;upscale neighborhood in Lahore with good schools&quot; — a normal search wouldn&#39;t find anything (no property is tagged with those exact words)</li>
+<li>Vector search would find DHA phases, Gulberg, and Bahria Town — because the AI understands these are &quot;upscale neighborhoods in Lahore&quot;</li>
+</ul>
+<p><strong>We use a special function in our database called <code>match_properties</code> that does this vector comparison.</strong></p>
+<hr>
+<h3>STEP 6: What is a &quot;Prompt&quot;? (Very Important)</h3>
+<p>A &quot;prompt&quot; is the instruction we give to the AI. Think of it as a <strong>job description</strong> for the AI.</p>
+<p>Our prompt tells Gemini:</p>
+<ol>
+<li><strong>Who you are:</strong> &quot;You are the FaidaHai AI Agent, an elite intelligence system&quot;</li>
+<li><strong>What data you have:</strong> &quot;Here is REAL LIVE MARKET DATA from our database...&quot;</li>
+<li><strong>What to do:</strong> &quot;Estimate the value of this property&quot;</li>
+<li><strong>Format rules:</strong> &quot;Give your answer in Pakistani Rupees&quot;</li>
+<li><strong>Failure handling:</strong> &quot;If you don&#39;t have enough data, DON&#39;T apologize — provide macro-economic projections instead&quot;</li>
+</ol>
+<p><strong>This prompt engineering is crucial.</strong> The same AI can give terrible answers or brilliant answers depending on how well the prompt is written.</p>
+<hr>
+<h2>PART 4: The &quot;All Pakistan&quot; Fallback (Key Innovation)</h2>
+<h3>The Problem</h3>
+<p>Our detailed property data is currently focused on <strong>Lahore</strong> and <strong>Gujrat</strong>. But our marketing says &quot;All Pakistan.&quot; What happens when someone searches for a city we don&#39;t have data for, like Peshawar or Quetta?</p>
+<h3>The Solution</h3>
+<p>We programmed the AI to NEVER fail. Instead, it gracefully handles missing data:</p>
+<p><strong>If data exists:</strong> The AI uses real local data for precise analysis.</p>
+<p><strong>If data is sparse or missing:</strong> The AI says:</p>
+<blockquote>
+<p><em>&quot;Hyper-local data for [City] is currently indexing for our next rollout. However, based on macro-economic data, here is the baseline projection...&quot;</em></p>
+</blockquote>
+<p>And then it provides general Pakistan real estate projections based on:</p>
+<ul>
+<li>National inflation rates</li>
+<li>Construction cost indices</li>
+<li>Regional development trends</li>
+<li>Historical property appreciation patterns</li>
+</ul>
+<p><strong>This means FaidaHai NEVER crashes, NEVER says &quot;I don&#39;t know.&quot; It always provides value.</strong></p>
+<hr>
+<h2>PART 5: What is RAG? (Your #1 Talking Point)</h2>
+<p><strong>RAG = Retrieval-Augmented Generation</strong></p>
+<p>This is the MOST important technical concept for your presentation. Here&#39;s how to explain it:</p>
+<h3>The Problem with Normal AI</h3>
+<p>If you ask ChatGPT: <em>&quot;What&#39;s a 5 Marla house worth in Chenab Orchard, Gujrat?&quot;</em></p>
+<p>ChatGPT will GUESS. It might give a completely wrong answer because:</p>
+<ul>
+<li>It was trained months ago — prices change daily</li>
+<li>It doesn&#39;t have access to Pakistani real estate databases</li>
+<li>It might hallucinate (make up) numbers that sound right but are wrong</li>
+</ul>
+<h3>How RAG Fixes This</h3>
+<p>RAG has two steps:</p>
+<p><strong>Step 1 — RETRIEVAL:</strong> Before the AI answers, it first SEARCHES our database for real, current market data. It RETRIEVES actual property listings.</p>
+<p><strong>Step 2 — GENERATION:</strong> Only AFTER getting real data, the AI GENERATES its answer. Now its answer is based on facts, not guesses.</p>
+<p><strong>Analogy:</strong></p>
+<blockquote>
+<p>Normal AI = A student answering exam questions from memory (might be wrong)
+RAG AI = A student who is allowed to open the textbook first, find the relevant pages, and THEN answer (much more accurate)</p>
+</blockquote>
+<h3>Why RAG Matters for FaidaHai</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Without RAG (Normal AI)</th>
+<th>With RAG (FaidaHai)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Data source</td>
+<td>AI&#39;s training data (months old)</td>
+<td>Our live database (updated regularly)</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>Low — guesses and estimates</td>
+<td>High — based on real listings</td>
+</tr>
+<tr>
+<td>Pakistan-specific</td>
+<td>Generic global knowledge</td>
+<td>Specific Pakistani market data</td>
+</tr>
+<tr>
+<td>Reliability</td>
+<td>May &quot;hallucinate&quot; fake data</td>
+<td>Grounded in verified listings</td>
+</tr>
+<tr>
+<td>Customization</td>
+<td>Same for everyone</td>
+<td>Personalized to user&#39;s query</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>PART 6: Data — Where Does Our Information Come From?</h2>
+<h3>What Data Do We Have?</h3>
+<p>Our database contains real property listings with:</p>
+<ul>
+<li><strong>Title</strong> (e.g., &quot;Luxury 5 Marla House&quot;)</li>
+<li><strong>Location</strong> (e.g., &quot;DHA Phase 8, Lahore&quot;)</li>
+<li><strong>Property Type</strong> (residential, commercial, plot)</li>
+<li><strong>Area</strong> (in sqft and marla/kanal)</li>
+<li><strong>Price</strong> (in PKR)</li>
+<li><strong>Bedrooms/Bathrooms</strong></li>
+<li><strong>Description</strong> (features, amenities)</li>
+</ul>
+<h3>How Was It Collected?</h3>
+<p>We built a <strong>data pipeline</strong> — an automated system that:</p>
+<ol>
+<li>Collects property listings from the market</li>
+<li>Cleans the data (removes duplicates, fixes formatting)</li>
+<li>Generates embeddings for each listing using Gemini</li>
+<li>Stores everything in our Supabase vector database</li>
+</ol>
+<p>This pipeline is written in <strong>Python</strong> (a programming language commonly used for data science and AI).</p>
+<hr>
+<h2>PART 7: JSON — How the AI Talks to Our Website</h2>
+<h3>What is JSON?</h3>
+<p>JSON (JavaScript Object Notation) is a way to organize data that both humans and computers can read. It looks like this:</p>
+<pre><code class="language-json">{
+  &quot;estimatedValue&quot;: &quot;4.2 Crore PKR&quot;,
+  &quot;projectedROI&quot;: 14.5,
+  &quot;strengths&quot;: [
+    &quot;Prime location near commercial hub&quot;,
+    &quot;Strong historical appreciation rate&quot;,
+    &quot;High rental demand&quot;
+  ],
+  &quot;risks&quot;: [
+    &quot;Market oversupply in adjacent phases&quot;,
+    &quot;Regulatory changes may affect pricing&quot;
+  ]
+}
+</code></pre>
+<p><strong>Why JSON?</strong></p>
+<ul>
+<li>It&#39;s structured — the website knows exactly where to find each piece of data</li>
+<li>It&#39;s reliable — the AI always responds in the same format</li>
+<li>It&#39;s fast — computers can parse it instantly</li>
+</ul>
+<p>We tell Gemini to ALWAYS respond in JSON format by setting <code>responseMimeType: &quot;application/json&quot;</code>. This means the AI can never respond with random text — it MUST follow our structure.</p>
+<hr>
+<h2>PART 8: Complete Q&amp;A Preparation</h2>
+<h3>Q: &quot;How is this different from Zameen.com?&quot;</h3>
+<blockquote>
+<p>&quot;Zameen is a listing platform — they show you what&#39;s for sale. FaidaHai is an intelligence platform — we analyze the market and tell you what&#39;s WORTH buying. We use AI to project future values and identify risks that a listing page can&#39;t show you.&quot;</p>
+</blockquote>
+<h3>Q: &quot;How is this different from just asking ChatGPT?&quot;</h3>
+<blockquote>
+<p>&quot;ChatGPT makes up answers from its training data. FaidaHai uses RAG — it first retrieves real data from our Pakistani market database, then generates analysis based on actual listings. Our answers are grounded in verified data, not guesses.&quot;</p>
+</blockquote>
+<h3>Q: &quot;What AI model do you use?&quot;</h3>
+<blockquote>
+<p>&quot;We use Google Gemini — specifically Gemini 1.5 Flash for analysis and Gemini Embedding 2 for our vector search system. Google Gemini is one of the most advanced AI systems in the world.&quot;</p>
+</blockquote>
+<h3>Q: &quot;What if the AI gives wrong information?&quot;</h3>
+<blockquote>
+<p>&quot;We minimize this risk through RAG — the AI always references real market data before answering. However, we clearly state that our projections are estimates and should be used as one of many tools in an investment decision.&quot;</p>
+</blockquote>
+<h3>Q: &quot;How accurate are the valuations?&quot;</h3>
+<blockquote>
+<p>&quot;Our valuations are based on real comparable listings in the same area. The more data we have for a neighborhood, the more accurate the estimate. For areas with dense data coverage like DHA Lahore, our estimates are highly reliable.&quot;</p>
+</blockquote>
+<h3>Q: &quot;Can the AI handle Urdu?&quot;</h3>
+<blockquote>
+<p>&quot;Currently, the interface is in English, but Google Gemini can understand and process Urdu queries. This is something we plan to fully support in a future update.&quot;</p>
+</blockquote>
+<h3>Q: &quot;What makes your AI approach &#39;elite&#39;?&quot;</h3>
+<blockquote>
+<p>&quot;Three things: First, we use RAG so our AI is grounded in real data. Second, our prompt engineering instructs the AI to behave as a professional analyst, not a generic chatbot. Third, our nationwide fallback ensures the AI never fails — it always provides value, even for cities with sparse data.&quot;</p>
+</blockquote>
+<h3>Q: &quot;How do you handle data privacy?&quot;</h3>
+<blockquote>
+<p>&quot;Every user&#39;s data is isolated using Row Level Security. The AI processes queries ephemerally — meaning queries are processed and discarded, not stored by Google to train their models.&quot;</p>
+</blockquote>
+<hr>
+<h2>PART 9: Key Terms Glossary (Memorize These)</h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Simple Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AI (Artificial Intelligence)</strong></td>
+<td>Computer programs that can think and make decisions like humans</td>
+</tr>
+<tr>
+<td><strong>Gemini</strong></td>
+<td>Google&#39;s most powerful AI model — the brain of FaidaHai</td>
+</tr>
+<tr>
+<td><strong>Embedding</strong></td>
+<td>Converting text into numbers so computers can understand meaning</td>
+</tr>
+<tr>
+<td><strong>Vector</strong></td>
+<td>A list of numbers that represents the meaning of text</td>
+</tr>
+<tr>
+<td><strong>Vector Search</strong></td>
+<td>Finding similar items by comparing their number representations</td>
+</tr>
+<tr>
+<td><strong>RAG</strong></td>
+<td>Retrieval-Augmented Generation — searching real data before AI answers</td>
+</tr>
+<tr>
+<td><strong>Prompt</strong></td>
+<td>The instruction we give to the AI (like a job description)</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>A structured data format the AI uses to send results back</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>Application Programming Interface — how our website talks to Google&#39;s AI</td>
+</tr>
+<tr>
+<td><strong>Hallucination</strong></td>
+<td>When AI makes up information that sounds real but isn&#39;t</td>
+</tr>
+<tr>
+<td><strong>Embedding Model</strong></td>
+<td>Special AI that converts text to vectors (Gemini Embedding 2)</td>
+</tr>
+<tr>
+<td><strong>LLM</strong></td>
+<td>Large Language Model — the type of AI that Gemini is</td>
+</tr>
+<tr>
+<td><strong>Token</strong></td>
+<td>A small piece of text (roughly a word) that AI processes</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>PART 10: Numbers &amp; Facts to Memorize</h2>
+<ul>
+<li>🤖 <strong>AI Model:</strong> Google Gemini 1.5 Flash</li>
+<li>📊 <strong>Embedding Model:</strong> Gemini Embedding 2</li>
+<li>📏 <strong>Vector Dimensions:</strong> 768 numbers per embedding</li>
+<li>⚡ <strong>Response Time:</strong> Under 5 seconds</li>
+<li>🔍 <strong>Similar Results:</strong> Top 5 most similar properties per search</li>
+<li>🇵🇰 <strong>Coverage:</strong> All of Pakistan (detailed: Lahore + Gujrat)</li>
+<li>📄 <strong>Response Format:</strong> Structured JSON</li>
+<li>🔒 <strong>Privacy:</strong> Queries are ephemeral — not used for Google&#39;s training</li>
+<li>🎯 <strong>Similarity Threshold:</strong> 50% minimum match score</li>
+<li>🐍 <strong>Data Pipeline:</strong> Written in Python</li>
+</ul>
+<hr>
+<div align="right">
+<i>made with love by HAMZA</i>
+</div>
+
+</body>
+</html>
