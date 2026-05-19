@@ -117,26 +117,34 @@ export function AIChatInterface() {
     
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("Not authenticated");
+      if (!user) throw new Error("Not authenticated. Please log in again.");
       
       const parsedValue = parseToNumeric(result.estimatedValue);
-      const parsedROI = parseFloat(result.projectedROI.replace(/[^0-9.-]/g, '')) || 0;
+      
+      // Handle projectedROI as either string or number
+      let parsedROI = 0;
+      if (typeof result.projectedROI === 'number') {
+        parsedROI = result.projectedROI;
+      } else if (typeof result.projectedROI === 'string') {
+        parsedROI = parseFloat(result.projectedROI.replace(/[^0-9.-]/g, '')) || 0;
+      }
       
       const { error } = await supabase.from('user_portfolios').insert({
         user_id: user.id,
         city: neighborhood,
-        floors,
-        area,
+        floors: String(floors),
+        area: String(area),
         estimated_value: parsedValue,
         projected_roi: parsedROI,
-        key_strengths: result.strengths,
-        risk_factors: result.risks
+        key_strengths: result.strengths || [],
+        risk_factors: result.risks || []
       });
       
       if (error) throw error;
       setSaveSuccess(true);
     } catch (err: any) {
       console.error("Failed to save to portfolio:", err);
+      alert(`Failed to save: ${err.message || 'Unknown error. Please try again.'}`);
     } finally {
       setIsSaving(false);
     }
